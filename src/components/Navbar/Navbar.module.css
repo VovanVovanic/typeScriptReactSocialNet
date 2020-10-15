@@ -1,0 +1,32 @@
+.nav {
+    grid-area: n;
+    background-color: burlywood;
+}
+
+.item {
+    display: block;
+    color: white;
+    text-decoration: none;
+    line-height: 38px;
+    cursor: pointer;
+        text-align: center;
+        margin: 10px;
+        width: 80%;
+        height: 40px;
+        background: linear-gradient(360deg, #383836 10%, #4a4a4a 360%);
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px 0px #000000,
+        inset 4px 4px 15px 0px #000000,
+        5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+}
+.item:hover{
+    background: linear-gradient(360deg, #b6eae1 10%, #D2FBAD 360%);
+    border-radius: 5px;
+    color: blue;
+    transition: all .5s ease-in-out;
+}
+
+.item.active {
+    color: gold;
+}
