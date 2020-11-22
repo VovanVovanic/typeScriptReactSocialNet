@@ -1,4 +1,4 @@
-
+import { ADD_DIALOG_MESSAGE, ADD_POST_MESSAGE, CHANGE_DIALOG_MESSAGE, CHANGE_POST_MESSAGE }from  './actionTypes'
 
 export type PostMessageType = {
     message: string
@@ -114,21 +114,21 @@ export const store: StoreType = {
 
     dispatch(action: any) {
         switch (action.type) {
-            case "CHANGE_POST_MESSAGE":
+            case CHANGE_POST_MESSAGE:
                 this._state.profile.newPostMessage = action.post
                 this.renderTree(this._state)
                 break;
-            case 'CHANGE_DIALOG_MESSAGE':
+            case CHANGE_DIALOG_MESSAGE:
                 this._state.dialogs.newDialogMessage = action.post
                 this.renderTree(this._state)
                 break;
-            case "ADD_POST_MESSAGE":
+            case ADD_POST_MESSAGE:
                 const newPostMessage = { message: this._state.profile.newPostMessage, like: 4 }
                 this._state.profile.postList.push(newPostMessage)
                 this.renderTree(this._state)
                 this._state.profile.newPostMessage = ''
                 break;
-            case "ADD_DIALOG_MESSAGE":
+            case ADD_DIALOG_MESSAGE:
                 const newDialogMessage = { label: this._state.dialogs.newDialogMessage }
                 this._state.dialogs.messages.push(newDialogMessage)
                 this.renderTree(this._state)
@@ -160,11 +160,11 @@ export const changeDialogMessageAC = (post: string) => {
     return {
         type: "CHANGE_DIALOG_MESSAGE",
         post: post
-    }
+    } as const
 }
 export const changePostMessageAC = (post: string) => {
     return {
         type: "CHANGE_POST_MESSAGE",
         post: post
-    }
+    } as const
 }
