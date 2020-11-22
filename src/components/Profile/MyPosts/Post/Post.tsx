@@ -1,7 +1,12 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = ({message, like}) => {
+
+type SinglePostType = {
+    message: string
+    like: number
+}
+const Post: React.FC<SinglePostType> = ({message, like}) => {
 
   return (
     <li className={s.item}>
