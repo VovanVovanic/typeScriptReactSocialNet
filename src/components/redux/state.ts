@@ -63,7 +63,6 @@ export type AddDialogMessageType = ReturnType<typeof addDialogMessageAC>
 
 export const store: StoreType = {
     renderTree(state: RootStateType) {
-        console.log('render')
     },
     _state: {
         profile: {
