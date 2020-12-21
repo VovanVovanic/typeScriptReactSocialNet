@@ -1,0 +1,56 @@
+.Users {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.UsersItem {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  background-color: chocolate;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.Img {
+  width: 100px;
+  height: 90px;
+  border-radius: 90%;
+  margin-left: 10px;
+}
+
+.Buttons {
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Content {
+  margin-left: 50px;
+}
+
+.Address {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.pageLink {
+  display: inline-block;
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border-radius: 4px;
+  background-color: darkgoldenrod;
+  margin: 10px;
+}

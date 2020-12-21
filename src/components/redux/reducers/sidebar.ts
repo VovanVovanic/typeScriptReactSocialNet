@@ -4,10 +4,8 @@ export type friendType = {
 }
 export type friendsType = Array<friendType>
 
-export type friendsStateType = {
-  friendList: friendsType
-}
-const initialState:friendsStateType = {
+export type friendsStateType = typeof initialState
+const initialState = {
     friendList: [
         { label: 'Andrew' },
         { label: 'Sasha' },

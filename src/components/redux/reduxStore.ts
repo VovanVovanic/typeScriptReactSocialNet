@@ -3,14 +3,14 @@ import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./reducers/profile";
 import {dialogReducer} from "./reducers/dialogs";
 import { sidebarReducer } from "./reducers/sidebar";
-// import { usersReducer } from "./reducers/users";
+import { usersReducer } from "./reducers/users";
 
 
 const reducers = combineReducers({
   profile: profileReducer,
   dialogs: dialogReducer,
   sidebar: sidebarReducer,
-  // users: usersReducer,
+  users: usersReducer,
 });
 
 type rootReducerType = typeof reducers

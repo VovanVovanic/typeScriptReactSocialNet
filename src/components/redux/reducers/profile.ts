@@ -5,11 +5,9 @@ export type postType = { post: string, like: number }
 export type postListType = Array<postType>
 export type newPostTextType = string
 
-export type profileStateType = {
-  postList: postListType
-  newPostText: newPostTextType
-}
-const initialState:profileStateType = {
+export type profileStateType = typeof initialState
+
+const initialState= {
     postList: [
         {post: "My message", like: 1},
         {post: "My second message", like: 6 }],

@@ -4,17 +4,13 @@ import { ADD_MESSAGE, ADD_MESSAGE_VALUE } from "../actions/types";
 
 export type newMessageTextType = string
 export type userType = { label: string }
-export type usersType = Array<userType>
+export type usersType = typeof initialState.users
 export type messageType = { label: string, id: number }
 export type messagesType = Array<messageType>
 
-export type dialogsStateType = {
-  newMessageText: newMessageTextType
-  users: usersType
-  messages: messagesType
+export type dialogsStateType = typeof initialState
 
-}
-const initialState: dialogsStateType = {
+const initialState = {
         newMessageText: '',
         users: [
             {label: "Anna"},
@@ -25,7 +21,7 @@ const initialState: dialogsStateType = {
             {label: "Piter"},
             {label: "Alex"},
             {label: "Frank"}
-        ],
+        ],  
 
         messages: [
             { label: "I am fine", id: 1 },
@@ -45,7 +41,7 @@ export const dialogReducer = (state:dialogsStateType = initialState, action:dial
       let newPost = { label: state.newMessageText, id: 34 };
       return {
         ...state,
-        newMessageText: "",
+        newMessageText: "",  
         messages:[...state.messages, newPost]
       }
       
