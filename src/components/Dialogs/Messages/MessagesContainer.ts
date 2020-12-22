@@ -1,5 +1,5 @@
 
-import { onMessageFormSubmit, onMessageFormSubmitType, onMessageTextChangeAction, onMessageTextChangeActionType } from "../../redux/actions/messages";
+import { onMessageFormSubmit, onMessageTextChangeAction} from "../../redux/actions/messages";
 import { connect } from 'react-redux'
 import Messages from './Messages'
 import { RootStateType } from "../../redux/reduxStore";
@@ -10,8 +10,8 @@ type MapStateType = {
   newMessageText: newMessageTextType
 }
 type MapDispatchType = {
-  onMessageFormSubmit: () => onMessageFormSubmitType
-  onMessageTextChangeAction: (text:string) => onMessageTextChangeActionType
+  onMessageFormSubmit: () => void
+  onMessageTextChangeAction: (text:string) => void
 }
 
 let mapStateToProps = (state:RootStateType):MapStateType => {

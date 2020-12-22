@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-import { onInputValueActionType, onPostAddedActionType } from '../../redux/actions/myPosts';
 import { newPostTextType, postListType } from '../../redux/reducers/profile';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
@@ -7,8 +6,8 @@ import Post from './Post/Post';
 export type PropsPostType = {
   list: postListType;
   msgText: newPostTextType;
-  onPostAddedAction: () => onPostAddedActionType;
-  onInputValueAction: (value: string) => onInputValueActionType;
+  onPostAddedAction: () => void
+  onInputValueAction: (value: string) => void
 };
 
 const MyPosts: React.FC<PropsPostType> = ({

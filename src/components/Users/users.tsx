@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Denny from "../../assets/images/Deineris.jpg";
-import { followUserType, noFollowUserType, setPaginationType } from "../redux/actions/users";
 import { UsersType } from "../redux/reducers/users";
 import classes from "./Users.module.css";
 
@@ -12,9 +11,9 @@ type UsersPropsTypes = {
   initialPage: number
   total: number
   pagination: number
-  followUser: (id: number) => followUserType
-  nofollowUser: (id: number) => noFollowUserType
-  setPagination: (pagination: number) => setPaginationType
+  followUser: (id: number) => void
+  nofollowUser: (id: number) => void
+  setPagination: (pagination: number) => void
   onPageSet: (i:number)=>void
 };
 const Users:React.FC<UsersPropsTypes> = ({

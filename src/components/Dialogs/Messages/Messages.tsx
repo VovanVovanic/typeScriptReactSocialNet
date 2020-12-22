@@ -1,15 +1,14 @@
 
 import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { onMessageFormSubmitType, onMessageTextChangeActionType } from "../../redux/actions/messages";
 import { messagesType } from "../../redux/reducers/dialogs";
 import classes from "./Messages.module.css";
 
 type MessagePropsType = {
   messages: messagesType;
   newMessageText: string;
-  onMessageFormSubmit: () => onMessageFormSubmitType;
-  onMessageTextChangeAction: (text: string) => onMessageTextChangeActionType;
+  onMessageFormSubmit: () => void
+  onMessageTextChangeAction: (text: string) => void
 };
 const Messages:React.FC<MessagePropsType> = ({
   messages,

@@ -1,7 +1,7 @@
 import { RootStateType } from './../../redux/reduxStore';
 import { connect } from 'react-redux'
 import MyPosts from './MyPosts'
-import { onInputValueAction, onInputValueActionType, onPostAddedAction, onPostAddedActionType, } from "../../redux/actions/myPosts";
+import { onInputValueAction, onPostAddedAction} from "../../redux/actions/myPosts";
 import { newPostTextType, postListType } from '../../redux/reducers/profile';
 
 
@@ -10,8 +10,8 @@ type MapStateType = {
   msgText: newPostTextType
 }
 type MapDispatchType = {
-  onPostAddedAction: () => onPostAddedActionType
-  onInputValueAction: (value:string) => onInputValueActionType
+  onPostAddedAction: () => void
+  onInputValueAction: (value:string) => void
 }
 let mapStateToProps = (state:RootStateType):MapStateType => {
   return {

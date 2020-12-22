@@ -13,14 +13,15 @@ import {
 
 type auxiliaryType<T> = T extends { [key: string]: infer actionType } ? actionType : never
 export type usersActionType = ReturnType<auxiliaryType<typeof usersActions>>
-export type followUserType = ReturnType<typeof usersActions.followUser>
-export type noFollowUserType = ReturnType<typeof usersActions.nofollowUser>
-export type setUsersType = ReturnType<typeof usersActions.setUsers>
-export type setPageType = ReturnType<typeof usersActions.setPage>
-export type setTotalType = ReturnType<typeof usersActions.setTotal>
-export type setPaginationType = ReturnType<typeof usersActions.setPagination>
-export type togglePreloaderType = ReturnType<typeof usersActions.togglePreloader>
-export type setProfileType = ReturnType<typeof usersActions.setProfile>
+
+// export type followUserType = ReturnType<typeof usersActions.followUser>
+// export type noFollowUserType = ReturnType<typeof usersActions.nofollowUser>
+// export type setUsersType = ReturnType<typeof usersActions.setUsers>
+// export type setPageType = ReturnType<typeof usersActions.setPage>
+// export type setTotalType = ReturnType<typeof usersActions.setTotal>
+// export type setPaginationType = ReturnType<typeof usersActions.setPagination>
+// export type togglePreloaderType = ReturnType<typeof usersActions.togglePreloader>
+// export type setProfileType = ReturnType<typeof usersActions.setProfile>
 
 export const usersActions = {
 followUser: (id:number) => {

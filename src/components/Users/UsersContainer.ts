@@ -1,6 +1,6 @@
 
 import { connect } from "react-redux";
-import { followUserType, noFollowUserType, setPageType, setPaginationType, setTotalType, setUsersType, togglePreloaderType, usersActions}from "../redux/actions/users";
+import { usersActions}from "../redux/actions/users";
 import { UsersType } from "../redux/reducers/users";
 import { RootStateType } from "../redux/reduxStore";
 import UsersGetRequest from "./usersGetRequest";
@@ -24,13 +24,13 @@ export type MapStateType = {
   isFetching: boolean
 }
 export type MapDispatchType = {
-  followUser: (id: number) => followUserType
-  nofollowUser: (id: number) => noFollowUserType
-  setUsers: (users: UsersType) => setUsersType
-  setPage: (page: number) => setPageType
-  setTotal: (page: number) => setTotalType
-  setPagination: (pagination: number) => setPaginationType
-  togglePreloader: (isFetching:boolean)=>togglePreloaderType
+  followUser: (id: number) => void
+  nofollowUser: (id: number) => void
+  setUsers: (users: UsersType) => void
+  setPage: (page: number) => void
+  setTotal: (page: number) => void
+  setPagination: (pagination: number) => void
+  togglePreloader: (isFetching:boolean)=>void
 }
 let mapStateToProps = (state: RootStateType):MapStateType => {
   return {

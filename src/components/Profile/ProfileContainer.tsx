@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { usersActions, setProfileType } from "../redux/actions/users";
+import { usersActions} from "../redux/actions/users";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import axios from "axios";
 import { RootStateType } from "../redux/reduxStore";
@@ -13,7 +13,7 @@ type MapStateType = {
   profile: ProfileType | null;
 };
 type MapDispatchType = {
-  setProfile: (profile: ProfileType) => setProfileType;
+  setProfile: (profile: ProfileType) => void
 };
 type PathParamsType = {
   userId: string
