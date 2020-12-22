@@ -20,7 +20,7 @@ export type setPageType = ReturnType<typeof usersActions.setPage>
 export type setTotalType = ReturnType<typeof usersActions.setTotal>
 export type setPaginationType = ReturnType<typeof usersActions.setPagination>
 export type togglePreloaderType = ReturnType<typeof usersActions.togglePreloader>
-export type setProfile = ReturnType<typeof usersActions.setProfile>
+export type setProfileType = ReturnType<typeof usersActions.setProfile>
 
 export const usersActions = {
 followUser: (id:number) => {
