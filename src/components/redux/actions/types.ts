@@ -10,3 +10,4 @@ export const SET__TOTAL = "SET__TOTAL";
 export const SET__PAGINATION = "SET__PAGINATION";
 export const TOGGLE__PRELOADER = "TOGGLE__PRELOADER ";
 export const SET__PROFILE = "SET__PROFILE"
+export const SET_USER_DATA = 'SET_USER_DATA'

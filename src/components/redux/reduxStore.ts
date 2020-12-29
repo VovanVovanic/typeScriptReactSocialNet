@@ -1,4 +1,4 @@
-
+import { authReducer } from './reducers/auth';
 import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./reducers/profile";
 import {dialogReducer} from "./reducers/dialogs";
@@ -11,6 +11,7 @@ const reducers = combineReducers({
   dialogs: dialogReducer,
   sidebar: sidebarReducer,
   users: usersReducer,
+  auth: authReducer
 });
 
 type rootReducerType = typeof reducers

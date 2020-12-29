@@ -29,7 +29,6 @@ class ProfileAPI extends Component<ProfileAPIPropsType> {
         `https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}/`
       )
       .then((response) => {
-        console.log(response.data)
         this.props.setProfile(response.data);
       });
   }
