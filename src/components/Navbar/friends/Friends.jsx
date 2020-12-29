@@ -8,8 +8,6 @@ const Friends = ({friendList}) => {
             <li key={i}>{label}</li>
         )    
         })
-    
-    console.log(myFriends)
     return (
         <div className={classes.Friends}>
             <h2>Friends</h2>

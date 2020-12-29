@@ -26,7 +26,7 @@ export default class UsersGetRequest extends React.Component<PropsType> {
     this.onPreloader(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=5`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=5`,{withCredentials:true}
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
@@ -35,7 +35,7 @@ export default class UsersGetRequest extends React.Component<PropsType> {
   };
   getTotal = () => {
     axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .get("https://social-network.samuraijs.com/api/1.0/users",{withCredentials:true})
       .then((response) => {
         this.props.setTotal(response.data.totalCount);
       });

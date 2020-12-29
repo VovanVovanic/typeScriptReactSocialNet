@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Denny from "../../assets/images/Deineris.jpg";
@@ -14,9 +15,9 @@ type UsersPropsTypes = {
   followUser: (id: number) => void
   nofollowUser: (id: number) => void
   setPagination: (pagination: number) => void
-  onPageSet: (i:number)=>void
+  onPageSet: (i: number) => void
 };
-const Users:React.FC<UsersPropsTypes> = ({
+const Users: React.FC<UsersPropsTypes> = ({
   users,
   nofollowUser,
   followUser,
@@ -40,7 +41,7 @@ const Users:React.FC<UsersPropsTypes> = ({
 
   let visiblePages = [...pagesList].splice(pagination, 10);
 
-  const paginationHandler = (dir:string) => {
+  const paginationHandler = (dir: string) => {
     if (dir === "back") {
       setPagination(pagination - 10);
     }
@@ -62,11 +63,47 @@ const Users:React.FC<UsersPropsTypes> = ({
         </NavLink>
 
         <div className={classes.Buttons}>
-          {followed ? (
-            <button onClick={() => nofollowUser(id)}>Follow</button>
+          {!followed ? (
+            <button onClick={() => {
+              axios
+                .post(
+                  `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+                  {},
+                  {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": "44ea4853-9f85-442f-ae33-04c415e0ca20",
+                    },
+                  }
+                )
+                .then((response) => {
+                  if (response.data.resultCode === 0) {
+                    followUser(id);
+                  }
+                });
+            }
+            }>Follow</button>
           ) : (
-            <button onClick={() => followUser(id)}>Nofollow</button>
-          )}
+              <button onClick={() => {
+                axios
+                  .delete(
+                    `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+                    {
+                      withCredentials: true,
+                      headers: {
+                        "API-KEY": "44ea4853-9f85-442f-ae33-04c415e0ca20",
+                      },
+                    }
+                  )
+                  .then((response) => {
+                    if (response.data.resultCode === 0) {
+                      nofollowUser(id);
+                    }
+                  });
+              }
+
+              }>Nofollow</button>
+            )}
         </div>
         <div className={classes.Content}>
           <h4>{name}</h4>
