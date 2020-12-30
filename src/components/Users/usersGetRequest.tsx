@@ -2,7 +2,8 @@ import React from "react";
 import Users from "./users";
 import Preloader from "../Preloader/preloader";
 import axios from "axios";
-import { UsersType } from "../redux/reducers/users";
+import { UsersType } from "../../redux/reducers/users";
+import { getItems } from "../../api/api";
 
 type PropsType = {
   users: UsersType;
@@ -22,32 +23,27 @@ type PropsType = {
 
 export default class UsersGetRequest extends React.Component<PropsType> {
   onPreloader = this.props.togglePreloader;
-  getUsers = (pageNumber:number) => {
+  getUsers = (pageNumber: number) => {
     this.onPreloader(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=5`,{withCredentials:true}
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
+    getItems(pageNumber)
+      .then((data) => {
+        this.props.setUsers(data.items);
         this.onPreloader(false);
       });
   };
-  getTotal = () => {
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users",{withCredentials:true})
-      .then((response) => {
-        this.props.setTotal(response.data.totalCount);
-      });
+  getTotal = (pageNumber: number) => {
+    getItems(pageNumber).then((data) => {
+      this.props.setTotal(data.totalCount);
+    });
   };
   componentDidMount() {
     this.getUsers(this.props.initialPage);
-    this.getTotal();
+    this.getTotal(1);
   }
 
   render() {
     const { setPage, isFetching, togglePreloader, ...usersProps } = this.props;
-    const onPageSet = (page:number) => {
+    const onPageSet = (page: number) => {
       setPage(page);
       this.getUsers(page);
     };

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import {friendType } from "../redux/reducers/sidebar";
-import { RootStateType } from "../redux/reduxStore";
+import {friendType } from "../../redux/reducers/sidebar";
+import { RootStateType } from "../../redux/reduxStore";
 import Navbar from "./Navbar";
 
 type MapStatePropsType = {

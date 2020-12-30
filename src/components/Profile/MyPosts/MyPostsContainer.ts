@@ -1,8 +1,8 @@
-import { RootStateType } from './../../redux/reduxStore';
+import { RootStateType } from '../../../redux/reduxStore';
 import { connect } from 'react-redux'
 import MyPosts from './MyPosts'
-import { onInputValueAction, onPostAddedAction} from "../../redux/actions/myPosts";
-import { newPostTextType, postListType } from '../../redux/reducers/profile';
+import { onInputValueAction, onPostAddedAction} from "../../../redux/actions/myPosts";
+import { newPostTextType, postListType } from '../../../redux/reducers/profile';
 
 
 type MapStateType = {

@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { usersType } from "../../redux/reducers/dialogs";
+import { usersType } from "../../../redux/reducers/dialogs";
 import classes from "./DialogsList.module.css";
 
 export type DialogsListPropsType = {

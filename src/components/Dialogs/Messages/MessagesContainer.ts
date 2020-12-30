@@ -1,9 +1,9 @@
 
-import { onMessageFormSubmit, onMessageTextChangeAction} from "../../redux/actions/messages";
+import { onMessageFormSubmit, onMessageTextChangeAction} from "../../../redux/actions/messages";
 import { connect } from 'react-redux'
 import Messages from './Messages'
-import { RootStateType } from "../../redux/reduxStore";
-import { messagesType, newMessageTextType } from "../../redux/reducers/dialogs";
+import { RootStateType } from "../../../redux/reduxStore";
+import { messagesType, newMessageTextType } from "../../../redux/reducers/dialogs";
 
 type MapStateType = {
   messages: messagesType

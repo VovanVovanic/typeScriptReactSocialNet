@@ -1,8 +1,8 @@
 
 import { connect } from "react-redux";
-import { usersActions}from "../redux/actions/users";
-import { UsersType } from "../redux/reducers/users";
-import { RootStateType } from "../redux/reduxStore";
+import { usersActions}from "../../redux/actions/users";
+import { UsersType } from "../../redux/reducers/users";
+import { RootStateType } from "../../redux/reduxStore";
 import UsersGetRequest from "./usersGetRequest";
 
 const {

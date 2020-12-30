@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { newPostTextType, postListType } from '../../redux/reducers/profile';
+import { newPostTextType, postListType } from '../../../redux/reducers/profile';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 

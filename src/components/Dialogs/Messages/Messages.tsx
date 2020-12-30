@@ -1,7 +1,7 @@
 
 import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { messagesType } from "../../redux/reducers/dialogs";
+import { messagesType } from "../../../redux/reducers/dialogs";
 import classes from "./Messages.module.css";
 
 type MessagePropsType = {

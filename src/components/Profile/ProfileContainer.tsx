@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { usersActions} from "../redux/actions/users";
+import { usersActions} from "../../redux/actions/users";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import axios from "axios";
-import { RootStateType } from "../redux/reduxStore";
-import { ProfileType } from "../redux/reducers/users";
+import { RootStateType } from "../../redux/reduxStore";
+import { ProfileType } from "../../redux/reducers/users";
+import { getThisUser } from "../../api/api";
 
 const{setProfile} = usersActions
 
@@ -24,13 +25,11 @@ type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileAPI extends Component<ProfileAPIPropsType> {
   componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}/`
-      )
-      .then((response) => {
-        this.props.setProfile(response.data);
-      });
+    getThisUser(this.props.match.params.userId).then((data) => {
+      console.log(data);
+      
+      this.props.setProfile(data);
+    });
   }
   render() {
     const { profile } = this.props;

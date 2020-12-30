@@ -28,7 +28,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import store, { RootStateType } from "./components/redux/reduxStore";
+import store, { RootStateType } from "./redux/reduxStore";
 import { Provider } from "react-redux";
 
 let renderTree = (state:RootStateType) => {

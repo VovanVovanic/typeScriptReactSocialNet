@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux'
-import { usersType } from '../../redux/reducers/dialogs'
-import { RootStateType } from '../../redux/reduxStore'
+import { usersType } from '../../../redux/reducers/dialogs'
+import { RootStateType } from '../../../redux/reduxStore'
 import DialogsList from './DialogsList'
 
 type MapStateType = {

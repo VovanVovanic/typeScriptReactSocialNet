@@ -1,8 +1,8 @@
 
 import { connect } from "react-redux";
-import { dataType } from "../redux/reducers/auth";
-import { setUserData } from "../redux/actions/auth";
-import { RootStateType } from "../redux/reduxStore";
+import { dataType } from "../../redux/reducers/auth";
+import { setUserData } from "../../redux/actions/auth";
+import { RootStateType } from "../../redux/reduxStore";
 import HeaderRequest from "./HeaderRequest";
 
 export type AuthMapStateTypes = {

@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/preloader";
 import Denny from "../../assets/images/Deineris.jpg";
-import { ProfileType } from "../redux/reducers/users";
+import { ProfileType } from "../../redux/reducers/users";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
