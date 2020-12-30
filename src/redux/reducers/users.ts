@@ -7,6 +7,7 @@ import {
   SET__PAGINATION,
   TOGGLE__PRELOADER,
   SET__PROFILE,
+  TOGGLE_FOLLOW_STATUS,
 } from "../actions/types";
 import { usersActionType } from "../actions/users";
 
@@ -48,7 +49,9 @@ const initialState = {
   total: 0,
   initialPagination: 0,
   isFetching: false,
-  profile: null as ProfileType | null
+  isFetchingFollow: false,
+  profile: null as ProfileType | null,
+  followInProgress: [] as Array<number>
 };
 
 export const usersReducer = (state:UsersStateType = initialState, action:usersActionType):UsersStateType => {
@@ -89,6 +92,13 @@ export const usersReducer = (state:UsersStateType = initialState, action:usersAc
       return {...state, isFetching: action.isFetching}
     case SET__PROFILE:
       return { ...state, profile: action.profile }
+    case TOGGLE_FOLLOW_STATUS: 
+      return {
+        ...state,
+        followInProgress: action.isFetchingFollow
+          ? [...state.followInProgress, action.userId]
+          : state.followInProgress.filter((el)=> el !== action.userId)
+      }
     default:
       return state;
   }

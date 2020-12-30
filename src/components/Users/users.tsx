@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { followThisUser, noFollowThisUser } from "../../api/api";
@@ -8,15 +8,17 @@ import classes from "./Users.module.css";
 
 
 type UsersPropsTypes = {
-  users: UsersType
-  pages: number
-  initialPage: number
-  total: number
-  pagination: number
-  followUser: (id: number) => void
-  nofollowUser: (id: number) => void
-  setPagination: (pagination: number) => void
-  onPageSet: (i: number) => void
+  users: UsersType;
+  pages: number;
+  initialPage: number;
+  total: number;
+  pagination: number;
+  followUser: (id: number) => void;
+  nofollowUser: (id: number) => void;
+  setPagination: (pagination: number) => void;
+  onPageSet: (i: number) => void;
+  triggerFollowStatus: (isFetchingFollow: boolean, userId: number) => void;
+  followInProgress: Array<number>
 };
 const Users: React.FC<UsersPropsTypes> = ({
   users,
@@ -27,6 +29,9 @@ const Users: React.FC<UsersPropsTypes> = ({
   total,
   pagination,
   setPagination,
+  triggerFollowStatus,
+  followInProgress
+  
 }) => {
   let pageLinkCount = Math.ceil(total / pages);
   let pagesList = [];
@@ -65,26 +70,36 @@ const Users: React.FC<UsersPropsTypes> = ({
 
         <div className={classes.Buttons}>
           {!followed ? (
-            <button onClick={() => {
-              followThisUser(id).then((data) => {
-                if (data.resultCode === 0) {
-                  followUser(id);
-                }
-              });
-            }
-            }>Follow</button>
+            <button
+              disabled={followInProgress.some((el) => el === id)}
+              onClick={() => {
+                triggerFollowStatus(true, id);
+                followThisUser(id).then((data) => {
+                  if (data.resultCode === 0) {
+                    followUser(id);
+                  }
+                  triggerFollowStatus(false, id);
+                });
+              }}
+            >
+              Follow
+            </button>
           ) : (
-              <button onClick={() => {
-                noFollowThisUser(id)
-                  .then((data) => {
-                    if (data.resultCode === 0) {
-                      nofollowUser(id);
-                    }
-                  });
-              }
-
-              }>Nofollow</button>
-            )}
+            <button
+              disabled={followInProgress.some((el) => el === id)}
+              onClick={() => {
+                triggerFollowStatus(true, id);
+                noFollowThisUser(id).then((data) => {
+                  if (data.resultCode === 0) {
+                    nofollowUser(id);
+                  }
+                  triggerFollowStatus(false, id);
+                });
+              }}
+            >
+              Nofollow
+            </button>
+          )}
         </div>
         <div className={classes.Content}>
           <h4>{name}</h4>

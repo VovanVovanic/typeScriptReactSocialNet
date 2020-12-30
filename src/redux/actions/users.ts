@@ -9,6 +9,7 @@ import {
   SET__PAGINATION,
   TOGGLE__PRELOADER,
   SET__PROFILE,
+  TOGGLE_FOLLOW_STATUS,
 } from "./types";
 
 type auxiliaryType<T> = T extends { [key: string]: infer actionType } ? actionType : never
@@ -47,5 +48,8 @@ togglePreloader: (isFetching:boolean) => {
 },
 setProfile: (profile: ProfileType) => {
   return { type: SET__PROFILE, profile} as const;
+  },
+triggerFollowStatus:(isFetchingFollow:boolean, userId:number) => {
+  return{type: TOGGLE_FOLLOW_STATUS, isFetchingFollow, userId} as const
 }
 }

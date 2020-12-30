@@ -1,7 +1,6 @@
 import React from "react";
 import Users from "./users";
 import Preloader from "../Preloader/preloader";
-import axios from "axios";
 import { UsersType } from "../../redux/reducers/users";
 import { getItems } from "../../api/api";
 
@@ -12,13 +11,15 @@ type PropsType = {
   isFetching: boolean; //
   total: number;
   pagination: number;
-  followUser: (id: number) => void
+  followUser: (id: number) => void;
   nofollowUser: (id: number) => void;
-  setPagination: (pagination: number) => void
-  setUsers: (users: UsersType) => void //
-  setPage: (page: number) => void //
-  setTotal: (page: number) => void//
-  togglePreloader: (isFetching: boolean) => void///
+  setPagination: (pagination: number) => void;
+  setUsers: (users: UsersType) => void; //
+  setPage: (page: number) => void; //
+  setTotal: (page: number) => void; //
+  togglePreloader: (isFetching: boolean) => void; ///
+  triggerFollowStatus: (isFetchingFollow: boolean, userId: number) => void;
+  followInProgress: Array<number>;
 };
 
 export default class UsersGetRequest extends React.Component<PropsType> {

@@ -12,7 +12,9 @@ const {
   setPage,
   setTotal,
   setPagination,
-  togglePreloader} = usersActions
+  togglePreloader,
+triggerFollowStatus
+} = usersActions
 
 
 export type MapStateType = {
@@ -22,6 +24,7 @@ export type MapStateType = {
   total: number
   pagination: number
   isFetching: boolean
+  followInProgress: Array<number>
 }
 export type MapDispatchType = {
   followUser: (id: number) => void
@@ -30,7 +33,8 @@ export type MapDispatchType = {
   setPage: (page: number) => void
   setTotal: (page: number) => void
   setPagination: (pagination: number) => void
-  togglePreloader: (isFetching:boolean)=>void
+  togglePreloader: (isFetching: boolean) => void
+  triggerFollowStatus: (isFetchingFollow:boolean, userId:number)=>void
 }
 let mapStateToProps = (state: RootStateType):MapStateType => {
   return {
@@ -39,7 +43,8 @@ let mapStateToProps = (state: RootStateType):MapStateType => {
     initialPage: state.users.initialPage,
     total: state.users.total,
     pagination: state.users.initialPagination,
-    isFetching: state.users.isFetching
+    isFetching: state.users.isFetching,
+    followInProgress: state.users.followInProgress
   };
 }
 
@@ -51,6 +56,8 @@ const UsersContainer = connect<MapStateType, MapDispatchType, {}, RootStateType>
   setTotal,
   setPagination,
   togglePreloader,
+  triggerFollowStatus
+
 })(UsersGetRequest);
 export default UsersContainer
 
