@@ -1,7 +1,6 @@
 import React from "react";
 import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import Preloader from "../Preloader/preloader";
 import Denny from "../../assets/images/Deineris.jpg";
 import { ProfileType } from "../../redux/reducers/users";
 
@@ -19,7 +18,7 @@ const Profile: React.FC<ProfilePropsType> = ({ profile }) => {
       <div>{profile.fullName}</div>
     </>
   ) : (
-    <Preloader />
+    ''
   );
   return (
     <div className={s.content}>

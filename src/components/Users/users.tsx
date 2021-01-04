@@ -1,7 +1,6 @@
 
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { followThisUser, noFollowThisUser } from "../../api/api";
 import Denny from "../../assets/images/Deineris.jpg";
 import { UsersType } from "../../redux/reducers/users";
 import classes from "./Users.module.css";
@@ -17,7 +16,6 @@ type UsersPropsTypes = {
   nofollowUser: (id: number) => void;
   setPagination: (pagination: number) => void;
   onPageSet: (i: number) => void;
-  triggerFollowStatus: (isFetchingFollow: boolean, userId: number) => void;
   followInProgress: Array<number>
 };
 const Users: React.FC<UsersPropsTypes> = ({
@@ -29,7 +27,6 @@ const Users: React.FC<UsersPropsTypes> = ({
   total,
   pagination,
   setPagination,
-  triggerFollowStatus,
   followInProgress
   
 }) => {
@@ -72,30 +69,14 @@ const Users: React.FC<UsersPropsTypes> = ({
           {!followed ? (
             <button
               disabled={followInProgress.some((el) => el === id)}
-              onClick={() => {
-                triggerFollowStatus(true, id);
-                followThisUser(id).then((data) => {
-                  if (data.resultCode === 0) {
-                    followUser(id);
-                  }
-                  triggerFollowStatus(false, id);
-                });
-              }}
+              onClick={() => followUser(id)}
             >
               Follow
             </button>
           ) : (
             <button
               disabled={followInProgress.some((el) => el === id)}
-              onClick={() => {
-                triggerFollowStatus(true, id);
-                noFollowThisUser(id).then((data) => {
-                  if (data.resultCode === 0) {
-                    nofollowUser(id);
-                  }
-                  triggerFollowStatus(false, id);
-                });
-              }}
+              onClick={() => nofollowUser(id)}
             >
               Nofollow
             </button>

@@ -1,20 +1,11 @@
 
 import { connect } from "react-redux";
-import { usersActions}from "../../redux/actions/users";
+import { usersActions, getUsers, followUser, nofollowUser,}from "../../redux/actions/users";
 import { UsersType } from "../../redux/reducers/users";
 import { RootStateType } from "../../redux/reduxStore";
 import UsersGetRequest from "./usersGetRequest";
 
-const {
-  followUser,
-  nofollowUser,
-  setUsers,
-  setPage,
-  setTotal,
-  setPagination,
-  togglePreloader,
-triggerFollowStatus
-} = usersActions
+const {setPage,setPagination} = usersActions
 
 
 export type MapStateType = {
@@ -29,12 +20,9 @@ export type MapStateType = {
 export type MapDispatchType = {
   followUser: (id: number) => void
   nofollowUser: (id: number) => void
-  setUsers: (users: UsersType) => void
   setPage: (page: number) => void
-  setTotal: (page: number) => void
+  getUsers: (page: number) => void
   setPagination: (pagination: number) => void
-  togglePreloader: (isFetching: boolean) => void
-  triggerFollowStatus: (isFetchingFollow:boolean, userId:number)=>void
 }
 let mapStateToProps = (state: RootStateType):MapStateType => {
   return {
@@ -51,12 +39,9 @@ let mapStateToProps = (state: RootStateType):MapStateType => {
 const UsersContainer = connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
   followUser,
   nofollowUser,
-  setUsers,
   setPage,
-  setTotal,
+  getUsers,
   setPagination,
-  togglePreloader,
-  triggerFollowStatus
 
 })(UsersGetRequest);
 export default UsersContainer
