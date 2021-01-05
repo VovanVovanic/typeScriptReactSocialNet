@@ -14,7 +14,7 @@ export const getUserData = ():ThunkAction<void, RootStateType, unknown, setUserD
   return (dispatch) => {
         authMe().then((data) => {
         if (data.resultCode === 0) {
-          dispatch(setUserData(data.data));
+          dispatch(setUserData(data.data))
           getThisUser(data.data.id).then((data) => {
             console.log(data.photos.small);
           });

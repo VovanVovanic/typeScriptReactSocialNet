@@ -1,7 +1,10 @@
 
+import { ComponentType } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { usersType } from '../../../redux/reducers/dialogs'
 import { RootStateType } from '../../../redux/reduxStore'
+import { withAuthRedirect } from '../../hoc/authRedirect'
 import DialogsList from './DialogsList'
 
 type MapStateType = {
@@ -12,5 +15,10 @@ let mapStateToProps = (state:RootStateType):MapStateType => {
     users: state.dialogs.users
   }
 }
-const DialogsListContainer = connect<MapStateType, {}, {}, RootStateType>(mapStateToProps)(DialogsList)
+
+
+const DialogsListContainer = compose<ComponentType>(
+  connect<MapStateType, {}, {}, RootStateType>(mapStateToProps),
+  withAuthRedirect
+)(DialogsList)
 export default DialogsListContainer

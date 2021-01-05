@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, ComponentType } from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { RootStateType } from "../../redux/reduxStore";
-import { ProfileType} from "../../redux/reducers/users";
+import { ProfileType } from "../../redux/reducers/users";
 import { setProfileData } from "../../redux/actions/users";
+import { compose } from "redux";
+import { withAuthRedirect } from "../hoc/authRedirect";
 
 
 type MapStateType = {
@@ -30,16 +32,16 @@ class ProfileAPI extends Component<ProfileAPIPropsType> {
   }
 }
 
-let mapStateToProps = (state: RootStateType):MapStateType => {
+let mapStateToProps = (state: RootStateType): MapStateType => {
   return {
     profile: state.users.profile,
   };
-};
+}
 
-const ProfileContainer = connect<
-  MapStateType,
-  MapDispatchType,
-  {},
-  RootStateType
->(mapStateToProps, { setProfileData })(withRouter(ProfileAPI));
+
+const ProfileContainer = compose<ComponentType>(
+  connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {setProfileData}),
+  withRouter,
+  withAuthRedirect
+)(ProfileAPI);
 export default ProfileContainer;

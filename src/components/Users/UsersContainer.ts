@@ -1,8 +1,11 @@
+import { ComponentType } from 'react';
 
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { usersActions, getUsers, followUser, nofollowUser,}from "../../redux/actions/users";
 import { UsersType } from "../../redux/reducers/users";
 import { RootStateType } from "../../redux/reduxStore";
+import { withAuthRedirect } from "../hoc/authRedirect";
 import UsersGetRequest from "./usersGetRequest";
 
 const {setPage,setPagination} = usersActions
@@ -36,13 +39,16 @@ let mapStateToProps = (state: RootStateType):MapStateType => {
   };
 }
 
-const UsersContainer = connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
+
+const UsersContainer = compose<ComponentType>(
+ connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
   followUser,
   nofollowUser,
   setPage,
   getUsers,
   setPagination,
-
-})(UsersGetRequest);
+}),
+  withAuthRedirect
+)(UsersGetRequest)
 export default UsersContainer
 
