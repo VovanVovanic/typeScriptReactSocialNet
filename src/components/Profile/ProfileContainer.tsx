@@ -3,17 +3,23 @@ import Profile from "./Profile";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { RootStateType } from "../../redux/reduxStore";
-import { ProfileType } from "../../redux/reducers/users";
-import { setProfileData } from "../../redux/actions/users";
 import { compose } from "redux";
 import { withAuthRedirect } from "../hoc/authRedirect";
-
+import {
+  getStatus,
+  setProfileData,
+  setNewStatus,
+} from "../../redux/actions/myPosts";
+import { ProfileType } from "../../redux/reducers/profile";
 
 type MapStateType = {
   profile: ProfileType | null;
+  status: string
 };
 type MapDispatchType = {
   setProfileData: (id: string) => void;
+  getStatus: (status: string) => void;
+  setNewStatus: (status: string)=> void
 };
 type PathParamsType = {
   userId: string
@@ -24,23 +30,32 @@ type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileAPI extends Component<ProfileAPIPropsType> {
   componentDidMount() {
-    this.props.setProfileData(this.props.match.params.userId)
+  let userId = this.props.match.params.userId
+    ? this.props.match.params.userId
+    : '13178';
+  this.props.setProfileData(userId)
+  this.props.getStatus(userId);
   }
   render() {
-    const { profile } = this.props;
-    return <Profile profile={profile} />;
+    const { profile, status } = this.props;
+    return <Profile profile={profile} status={status} setNewStatus={ this.props.setNewStatus}/>;
   }
 }
 
 let mapStateToProps = (state: RootStateType): MapStateType => {
   return {
-    profile: state.users.profile,
+    profile: state.profile.profile,
+    status: state.profile.status,
   };
 }
 
 
 const ProfileContainer = compose<ComponentType>(
-  connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {setProfileData}),
+  connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
+    setProfileData,
+    getStatus,
+    setNewStatus
+  }),
   withRouter,
   withAuthRedirect
 )(ProfileAPI);

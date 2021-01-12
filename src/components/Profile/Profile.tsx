@@ -2,13 +2,17 @@ import React from "react";
 import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Denny from "../../assets/images/Deineris.jpg";
-import { ProfileType } from "../../redux/reducers/users";
+import { ProfileType } from "../../redux/reducers/profile";
+import ProfileStatus from "./ProfileStatus";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
+  status: string
+  setNewStatus: (status:string)=>void
 };
 
-const Profile: React.FC<ProfilePropsType> = ({ profile }) => {
+const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) => {
+ 
   let isProfile = profile ? (
     <>
       <img
@@ -22,10 +26,8 @@ const Profile: React.FC<ProfilePropsType> = ({ profile }) => {
   );
   return (
     <div className={s.content}>
-      <div>
-        <img src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350" />
-      </div>
       <div>{isProfile}</div>
+      <ProfileStatus status={status} setNewStatus={setNewStatus}/>
       <MyPostsContainer />
     </div>
   );

@@ -1,7 +1,7 @@
 
 import { ThunkAction } from "redux-thunk";
 import { followThisUser, getItems, getThisUser, noFollowThisUser } from "../../api/api";
-import { ProfileType, UsersType } from "../reducers/users";
+import { UsersType } from "../reducers/users";
 import { RootStateType } from "../reduxStore";
 import {
   FOLLOW,
@@ -11,21 +11,12 @@ import {
   SET__TOTAL,
   SET__PAGINATION,
   TOGGLE__PRELOADER,
-  SET__PROFILE,
   TOGGLE_FOLLOW_STATUS,
 } from "./types";
 
 type auxiliaryType<T> = T extends { [key: string]: infer actionType } ? actionType : never
 export type usersActionType = ReturnType<auxiliaryType<typeof usersActions>>
 
-// export type followUserType = ReturnType<typeof usersActions.followUser>
-// export type noFollowUserType = ReturnType<typeof usersActions.nofollowUser>
-// export type setUsersType = ReturnType<typeof usersActions.setUsers>
-// export type setPageType = ReturnType<typeof usersActions.setPage>
-// export type setTotalType = ReturnType<typeof usersActions.setTotal>
-// export type setPaginationType = ReturnType<typeof usersActions.setPagination>
-// export type togglePreloaderType = ReturnType<typeof usersActions.togglePreloader>
-// export type setProfileType = ReturnType<typeof usersActions.setProfile>
 
 export const usersActions = {
   followUser: (id: number) => {
@@ -49,15 +40,10 @@ export const usersActions = {
   togglePreloader: (isFetching: boolean) => {
     return { type: TOGGLE__PRELOADER, isFetching } as const;
   },
-  setProfile: (profile: ProfileType) => {
-    return { type: SET__PROFILE, profile } as const;
-  },
   triggerFollowStatus: (isFetchingFollow: boolean, userId: number) => {
     return { type: TOGGLE_FOLLOW_STATUS, isFetchingFollow, userId } as const
   }
 }
-
-
 
 
 export const getUsers = (pageNumber: number): ThunkAction<void, RootStateType, unknown, usersActionType> => {
@@ -91,12 +77,5 @@ export const nofollowUser = (id: number): ThunkAction<void, RootStateType, unkno
       }
       dispatch(usersActions.triggerFollowStatus(false, id));
     })
-  }
-}
-export const setProfileData = (id: string): ThunkAction<void, RootStateType, unknown, usersActionType> => {
-  return (dispatch) => {
-        getThisUser(id).then((data) => {
-      dispatch(usersActions.setProfile(data));
-    });
   }
 }

@@ -12,3 +12,4 @@ export const TOGGLE__PRELOADER = "TOGGLE__PRELOADER ";
 export const SET__PROFILE = "SET__PROFILE"
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const TOGGLE_FOLLOW_STATUS = 'TOGGLE_FOLLOW_STATUS'
+export const SET_STATUS = 'SET_STATUS'

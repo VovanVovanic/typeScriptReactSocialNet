@@ -32,15 +32,7 @@ export type ContactsType = {
   twitter: null | string
   instagram: null | string
 }
-export type ProfileType = {
-  userId: number
-  aboutMe: null | string
-  contacts: ContactsType
-  fullName: string
-  lookingForAJob: false
-  lookingForAJobDescription: null | string
-  photos: PhotosType
-}
+
 export type UsersStateType = typeof initialState
 const initialState = {
   users: [] as UsersType,
@@ -50,7 +42,6 @@ const initialState = {
   initialPagination: 0,
   isFetching: false,
   isFetchingFollow: false,
-  profile: null as ProfileType | null,
   followInProgress: [] as Array<number>
 };
 
@@ -90,8 +81,6 @@ export const usersReducer = (state:UsersStateType = initialState, action:usersAc
       return { ...state, users: [...action.users] };
     case TOGGLE__PRELOADER:
       return {...state, isFetching: action.isFetching}
-    case SET__PROFILE:
-      return { ...state, profile: action.profile }
     case TOGGLE_FOLLOW_STATUS: 
       return {
         ...state,
