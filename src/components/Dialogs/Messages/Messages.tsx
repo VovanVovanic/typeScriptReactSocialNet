@@ -1,20 +1,19 @@
 
-import React, { FormEvent } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { messagesType } from "../../../redux/reducers/dialogs";
+import AddMessageForm, { MessageDataType } from "./AddMessageForm";
 import classes from "./Messages.module.css";
 
 type MessagePropsType = {
   messages: messagesType;
-  newMessageText: string;
-  onMessageFormSubmit: () => void
-  onMessageTextChangeAction: (text: string) => void
+  onMessageFormSubmit: (value:string) => void
+  
 };
 const Messages:React.FC<MessagePropsType> = ({
   messages,
-  newMessageText,
   onMessageFormSubmit,
-  onMessageTextChangeAction,
+
 }) => {
   const msgList = messages.map(({ label }, i) => {
     return (
@@ -24,24 +23,20 @@ const Messages:React.FC<MessagePropsType> = ({
     );
   });
 
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onMessageFormSubmit();
+  const onFormSubmit = (values: MessageDataType) => {
+    onMessageFormSubmit(values.newMessageText);
   };
-  const onMessageTextChange = (e: FormEvent<HTMLInputElement>) => {
-    onMessageTextChangeAction(e.currentTarget.value);
-  };
+
   return (
     <>
       <ul className={classes.Messages}>{msgList}</ul>
-      <form onSubmit={onFormSubmit}>
-        <input onInput={onMessageTextChange} value={newMessageText} />
-        <button>add post</button>
-      </form>
+      <AddMessageForm onSubmit={onFormSubmit}/>
     </>
   );
 };
 
 export default Messages;
+
+
 
 

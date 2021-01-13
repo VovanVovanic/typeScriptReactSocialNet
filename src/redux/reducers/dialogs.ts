@@ -1,8 +1,7 @@
 
 import { dialogsType } from "../actions/messages";
-import { ADD_MESSAGE, ADD_MESSAGE_VALUE } from "../actions/types";
+import { ADD_MESSAGE } from "../actions/types";
 
-export type newMessageTextType = string
 export type userType = { label: string }
 export type usersType = typeof initialState.users
 export type messageType = { label: string, id: number }
@@ -11,7 +10,6 @@ export type messagesType = Array<messageType>
 export type dialogsStateType = typeof initialState
 
 const initialState = {
-        newMessageText: '',
         users: [
             {label: "Anna"},
             {label: "Natalya"},  
@@ -34,14 +32,10 @@ const initialState = {
     
 export const dialogReducer = (state:dialogsStateType = initialState, action:dialogsType):dialogsStateType => {
   switch (action.type) {
-    case ADD_MESSAGE_VALUE:
-      return {
-        ...state, newMessageText: action.text}
     case ADD_MESSAGE: {
-      let newPost = { label: state.newMessageText, id: 34 };
+      let newPost = { label: action.value, id: 34 };
       return {
-        ...state,
-        newMessageText: "",  
+        ...state,  
         messages:[...state.messages, newPost]
       }
       

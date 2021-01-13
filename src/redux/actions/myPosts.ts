@@ -4,7 +4,7 @@ import { ThunkAction } from "redux-thunk";
 import { getThisStatus, getThisUser,  updateThisStatus,  } from "../../api/api";
 import { ProfileType } from "../reducers/profile";
 import { RootStateType } from "../reduxStore";
-import {ADD_POST, ADD_POST_VALUE, SET_STATUS, SET__PROFILE} from "./types";
+import {ADD_POST,  SET_STATUS, SET__PROFILE} from "./types";
 
 
 
@@ -14,12 +14,9 @@ export type postsActionType = ReturnType<auxType<typeof postsActions>>
 
 
 export const postsActions = {
- onPostAddedAction:() => {
-    return { type: ADD_POST } as const;
+ onPostAddedAction:(value:string) => {
+    return { type: ADD_POST, value } as const;
 },
-onInputValueAction: (text:string)=> {
-    return { type: ADD_POST_VALUE, text } as const
-}, 
 setProfile:(profile: ProfileType) => {
     return { type: SET__PROFILE, profile } as const;
   },

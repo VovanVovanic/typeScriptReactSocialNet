@@ -1,42 +1,33 @@
-import React, { ChangeEvent } from 'react';
-import { newPostTextType, postListType } from '../../../redux/reducers/profile';
+import React from 'react';
+import { postListType } from '../../../redux/reducers/profile';
 import classes from './MyPosts.module.css';
+import MyPostsForm, { PostsDataType } from './MyPostsForm';
 import Post from './Post/Post';
 
 export type PropsPostType = {
   list: postListType;
-  msgText: newPostTextType;
-  onPostAddedAction: () => void
-  onInputValueAction: (value: string) => void
+  onPostAddedAction: (value: string) => void;
 };
 
 const MyPosts: React.FC<PropsPostType> = ({
   list,
-  msgText,
   onPostAddedAction,
-  onInputValueAction,
+
 }) => {
   const postList = list.map(({ post, like }, i) => {
     return <Post key={i} message={post} like={like} />;
   });
 
-  const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.currentTarget.value) {
-      onInputValueAction(e.currentTarget.value);
-    }
-  };
 
-  const onAddMessage = () => {
-    onPostAddedAction();
+
+  const onPostsFormHandler = (values: PostsDataType) => {
+    onPostAddedAction(values.PostFormText);
   };
 
   return (
     <div className={classes.Posts}>
       <h2>My Posts</h2>
-      <div>
-        <textarea value={msgText} onChange={onChangeMessage}></textarea>
-        <button onClick={onAddMessage}>Add post</button>
-      </div>
+      <MyPostsForm onSubmit={onPostsFormHandler}/>
       <ul>{postList}</ul>
     </div>
   );

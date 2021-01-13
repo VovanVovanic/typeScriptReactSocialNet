@@ -23,20 +23,19 @@ const initialState= {
         {post: "My message", like: 1},
         { post: "My second message", like: 6 }],
     profile: null as ProfileType | null,
-    newPostText: '',
+
     status: ''
 }
 
 export const profileReducer = (state: profileStateType = initialState, action: postsActionType): profileStateType => {
     switch (action.type) {
-        case ADD_POST_VALUE: return { ...state, newPostText: action.text }
+     
 
         case ADD_POST: {
-            let newPost = { post: state.newPostText, like: 3 }
+            let newPost = { post: action.value, like: 3 }
             return {
                 ...state,
                 postList: [...state.postList, newPost],
-                newPostText: ""
             }
         }
         case SET__PROFILE:
