@@ -1,5 +1,5 @@
 import { postsActionType} from "../actions/myPosts";
-import { ADD_POST, ADD_POST_VALUE, SET_STATUS, SET__PROFILE } from "../actions/types";
+import { ADD_POST, SET_STATUS, SET__PROFILE } from "../actions/types";
 import { ContactsType, PhotosType } from "./users";
 
 export type postType = { post: string, like: number }
@@ -9,7 +9,6 @@ export type newPostTextType = string
 
 export type ProfileType = {
   userId: number
-  aboutMe: null | string
   contacts: ContactsType
   fullName: string
   lookingForAJob: false

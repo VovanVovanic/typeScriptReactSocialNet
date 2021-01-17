@@ -10,10 +10,10 @@ const LoginF:React.FC<InjectedFormProps<LoginDataType>> = ({handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field placeholder="Login" component="input" name='Login' type="text" />
+        <Field placeholder="Login" component="input" name='email' type="text" />
       </div>
       <div>
-        <Field placeholder="Password" component="input" name='Password' type="password" />
+        <Field placeholder="Password" component="input" name='password' type="password" />
       </div>
       <div>
         <Field  component="input" type="checkbox" name='RememberMe' /> Remember me
@@ -23,6 +23,8 @@ const LoginF:React.FC<InjectedFormProps<LoginDataType>> = ({handleSubmit}) => {
       </div>
     </form>
   );
+
+
 }
 const LoginForm = reduxForm<LoginDataType>({
   form: 'login'

@@ -4,18 +4,19 @@ import {  SET_USER_DATA } from "../actions/types";
 
 
 export type dataType = {
-  userId: null | string
+  id: null | number
   email: null | string
   login: null | string
-  imageSrc:null | string
+  
 }
 export type authStateType = dataType & {
   isFetching: boolean
   isLogged: boolean
+  imageSrc:null | string
 }
 
 const initialState:authStateType = {
-  userId: null,
+  id: null,
   email: null,
   login: null,
   imageSrc:null,

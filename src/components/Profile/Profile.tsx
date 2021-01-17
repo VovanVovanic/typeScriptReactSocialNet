@@ -12,7 +12,6 @@ type ProfilePropsType = {
 };
 
 const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) => {
- 
   let isProfile = profile ? (
     <>
       <img
@@ -23,11 +22,25 @@ const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) 
     </>
   ) : (
     ''
-  );
+    );
+  
+  let keys =profile && (Object.keys(profile.contacts) as Array<keyof typeof profile.contacts>);
+  let socials = keys?.map((el) => {
+    return (
+      <li key={el}>
+        {el}
+        </li>
+      )
+    })
+  
   return (
     <div className={s.content}>
       <div>{isProfile}</div>
-      <ProfileStatus status={status} setNewStatus={setNewStatus}/>
+      <ProfileStatus status={status} setNewStatus={setNewStatus} />
+      <div>{profile?.fullName}</div>
+      <div>{profile?.lookingForAJob}</div>
+      <div>{profile?.lookingForAJobDescription}</div>
+      <ul>{socials}</ul>
       <MyPostsContainer />
     </div>
   );

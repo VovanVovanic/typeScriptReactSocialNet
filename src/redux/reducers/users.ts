@@ -6,7 +6,6 @@ import {
   SET__TOTAL,
   SET__PAGINATION,
   TOGGLE__PRELOADER,
-  SET__PROFILE,
   TOGGLE_FOLLOW_STATUS,
 } from "../actions/types";
 import { usersActionType } from "../actions/users";
@@ -31,6 +30,9 @@ export type ContactsType = {
   vk: null | string
   twitter: null | string
   instagram: null | string
+  github: null | string
+  youtube: null | string
+  mainLink: null | string
 }
 
 export type UsersStateType = typeof initialState

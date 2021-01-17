@@ -1,6 +1,6 @@
 
 import { ThunkAction } from "redux-thunk";
-import { followThisUser, getItems, getThisUser, noFollowThisUser } from "../../api/api";
+import { followThisUser, getItems, noFollowThisUser } from "../../api/api";
 import { UsersType } from "../reducers/users";
 import { RootStateType } from "../reduxStore";
 import {
@@ -62,6 +62,8 @@ export const followUser = (id: number): ThunkAction<void, RootStateType, unknown
     dispatch(usersActions.triggerFollowStatus(true, id));
     followThisUser(id).then((data) => {
       if (data.resultCode === 0) {
+        console.log(data.data);
+        
         dispatch(usersActions.followUser(id));
       }
       dispatch(usersActions.triggerFollowStatus(false, id));

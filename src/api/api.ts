@@ -1,4 +1,8 @@
+
 import axios from 'axios'
+import { dataType } from '../redux/reducers/auth'
+import { ProfileType } from '../redux/reducers/profile'
+import { UsersType } from '../redux/reducers/users'
 
 let instance = axios.create({
 baseURL:`https://social-network.samuraijs.com/api/1.0/`,
@@ -8,28 +12,39 @@ baseURL:`https://social-network.samuraijs.com/api/1.0/`,
   },
 })
 
+type CommonResponseType<D> = {
+  resultCode: number
+  messages: Array<string>
+  data: D
+}
+
+type GetItemsResponseType = {
+  items: UsersType
+  totalCount: number
+  error: null | string
+}
+
+
+
 export const getItems = (pageNumber: number) => {
-  return instance.get(`users?page=${pageNumber}&count=5`).then(response => response.data)
+  return instance.get<GetItemsResponseType>(`users?page=${pageNumber}&count=5`).then(response => response.data)
 }
   
 export const followThisUser = (id: number) => {
-  return instance.post(`follow/${id}`).then(response => response.data)
+  return instance.post<CommonResponseType<Object>>(`follow/${id}`).then(response => response.data)
 }
 export const noFollowThisUser = (id: number) => {
-  return instance.delete(`follow/${id}`).then(response => response.data)
+  return instance.delete<CommonResponseType<Object>>(`follow/${id}`).then(response => response.data)
 }
 export const getThisUser = (id: string) => {
-  return instance.get(`profile/${id}`).then(response => response.data)
+  return instance.get<ProfileType>(`profile/${id}`).then(response => response.data)
 }
 export const authMe = () => {
-  return instance.get(`auth/me`).then(response => response.data)
+  return instance.get<CommonResponseType<dataType>>(`auth/me`).then(response => response.data)
 }
 export const getThisStatus = (id: string) => {
- 
   return instance.get(`profile/status/${id}`).then(response => response.data)
 }
-
 export const updateThisStatus = (status: string) => {
-  
-  return instance.put(`profile/status/`,{status}).then(response => response.data)
+  return instance.put<CommonResponseType<Object>>(`profile/status/`,{status}).then(response => response.data)
 }
