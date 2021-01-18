@@ -1,0 +1,10 @@
+.textArreaWrapper{
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.textArreaWrapper.error textarea {
+  background: crimson;
+  opacity: .4;
+  border: 2px solid red
+}

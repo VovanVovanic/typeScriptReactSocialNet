@@ -32,7 +32,7 @@ class ProfileAPI extends Component<ProfileAPIPropsType> {
   componentDidMount() {
   let userId = this.props.match.params.userId
     ? this.props.match.params.userId
-    : '13178';
+    : "13178";
   this.props.setProfileData(userId)
   this.props.getStatus(userId);
   }

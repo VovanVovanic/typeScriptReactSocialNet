@@ -1,23 +1,28 @@
+import classes from './form.module.css';
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { required } from '../../utils/validators';
+import { Input } from '../common/formControls';
 
 export type LoginDataType = {
-  Login: string
-  Password: string
-  RememberMe: boolean
+  email: string
+  password: string
+  rememberMe: boolean
 }
-const LoginF:React.FC<InjectedFormProps<LoginDataType>> = ({handleSubmit}) => {
+const LoginF: React.FC<InjectedFormProps<LoginDataType>> = ({handleSubmit, error}) => {
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field placeholder="Login" component="input" name='email' type="text" />
+        <Field placeholder="Email" validate={[required]} component={Input} name='email' type="email" />
       </div>
       <div>
-        <Field placeholder="Password" component="input" name='password' type="password" />
+        <Field placeholder="Password" validate={[required]} component={Input} name='password' type="password" />
       </div>
       <div>
-        <Field  component="input" type="checkbox" name='RememberMe' /> Remember me
+        <Field  component="input" type="checkbox" name='rememberMe' /> Remember me
       </div>
+      {error && <div className={classes.formError}>{error}</div>}
       <div>
         <button>Login</button>
       </div>

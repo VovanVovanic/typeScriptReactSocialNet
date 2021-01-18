@@ -1,6 +1,6 @@
 
 import { connect } from "react-redux";
-import{getUserData} from '../../redux/actions/auth'
+import{getUserData, logoff} from '../../redux/actions/auth'
 import { RootStateType } from "../../redux/reduxStore";
 import HeaderRequest from "./HeaderRequest";
 
@@ -10,7 +10,8 @@ export type AuthMapStateTypes = {
   isLogged: boolean
 };
 export type AuthDispatchType = {
-  getUserData: ()=> void
+  getUserData: () => void
+  logoff: ()=>void
 }
 const mapStateToProps = (state:RootStateType):AuthMapStateTypes => {
   return {
@@ -25,5 +26,5 @@ const HeaderContainer = connect<
   AuthDispatchType,
   {},
   RootStateType
->(mapStateToProps, { getUserData })(HeaderRequest);
+>(mapStateToProps, { getUserData, logoff })(HeaderRequest);
  export default HeaderContainer

@@ -31,10 +31,10 @@ export const getItems = (pageNumber: number) => {
 }
   
 export const followThisUser = (id: number) => {
-  return instance.post<CommonResponseType<Object>>(`follow/${id}`).then(response => response.data)
+  return instance.post<CommonResponseType<{}>>(`follow/${id}`).then(response => response.data)
 }
 export const noFollowThisUser = (id: number) => {
-  return instance.delete<CommonResponseType<Object>>(`follow/${id}`).then(response => response.data)
+  return instance.delete<CommonResponseType<{}>>(`follow/${id}`).then(response => response.data)
 }
 export const getThisUser = (id: string) => {
   return instance.get<ProfileType>(`profile/${id}`).then(response => response.data)
@@ -47,4 +47,10 @@ export const getThisStatus = (id: string) => {
 }
 export const updateThisStatus = (status: string) => {
   return instance.put<CommonResponseType<Object>>(`profile/status/`,{status}).then(response => response.data)
+}
+export const loginMe = (email: string, password: string, rememberMe: boolean = false) => {
+  return instance.post<CommonResponseType<{userId:number}>>(`/auth/login/`,{email, password, rememberMe}).then(response => response.data)
+}
+export const logoffMe = () => {
+  return instance.delete<CommonResponseType<{}>>(`/auth/login/`).then(response => response.data)
 }
