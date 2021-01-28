@@ -7,6 +7,7 @@ import { SET_USER_DATA } from "./types";
 
 export type setUserDataType = ReturnType<typeof setUserData>
 export type StopSubmitType = ReturnType<typeof stopSubmit>
+
 export const setUserData =(data:dataType, isLogged: boolean) => { 
     return { type: SET_USER_DATA, data, isLogged } as const;
 }
