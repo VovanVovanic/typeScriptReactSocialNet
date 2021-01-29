@@ -31,8 +31,10 @@ type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 class ProfileAPI extends Component<ProfileAPIPropsType> {
   componentDidMount() {
   let userId = this.props.match.params.userId
-    ? this.props.match.params.userId
-    : "13178";
+    if (!userId) {
+      userId = String(this.props.profile?.userId)
+      if(!userId){this.props.history.push('/login')}
+    }
   this.props.setProfileData(userId)
   this.props.getStatus(userId);
   }
