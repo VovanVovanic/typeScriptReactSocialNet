@@ -6,14 +6,14 @@ import "./index.css";
 import store, { RootStateType } from "./redux/reduxStore";
 import { Provider } from "react-redux";
 import AppContainer from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 let renderTree = (state:RootStateType) => {
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <AppContainer />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>,
     document.getElementById("root")
   );

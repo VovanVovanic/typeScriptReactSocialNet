@@ -1,7 +1,7 @@
 
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Denny from "../../assets/images/Deineris.jpg";
+import Ava from "../../assets/images/ava.gif";
 import { UsersType } from "../../redux/reducers/users";
 import classes from "./Users.module.css";
 
@@ -60,8 +60,8 @@ const Users: React.FC<UsersPropsTypes> = ({
         <NavLink to={"/profile/" + id}>
           <img
             className={classes.Img}
-            src={photos.small ? photos.small : Denny}
-            alt={"Denny"}
+            src={photos.small ? photos.small : Ava}
+            alt={"Ava"}
           />
         </NavLink>
 

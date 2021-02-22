@@ -1,4 +1,4 @@
-import React, { Component, ComponentType } from "react";
+import React, {ComponentType, useEffect } from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -19,7 +19,7 @@ type MapStateType = {
 type MapDispatchType = {
   setProfileData: (id: string) => void;
   getStatus: (status: string) => void;
-  setNewStatus: (status: string)=> void
+  setNewStatus: (status: string) => void
 };
 type PathParamsType = {
   userId: string
@@ -28,20 +28,37 @@ type OwnPropsType = MapStateType & MapDispatchType
 
 type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-class ProfileAPI extends Component<ProfileAPIPropsType> {
-  componentDidMount() {
-  let userId = this.props.match.params.userId
+const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, status, setProfileData, getStatus, setNewStatus }) => {
+  
+  let userId = match.params.userId;
+
+ 
+  useEffect(() => {
+   
     if (!userId) {
-      userId = String(this.props.profile?.userId)
-      if(!userId){this.props.history.push('/login')}
+      userId = String(profile?.userId);
+      if (!userId) {
+        history.push("/login");
+      }
     }
-  this.props.setProfileData(userId)
-  this.props.getStatus(userId);
-  }
-  render() {
-    const { profile, status } = this.props;
-    return <Profile profile={profile} status={status} setNewStatus={ this.props.setNewStatus}/>;
-  }
+    setProfileData(userId);
+    getStatus(userId);
+
+  }, [])
+
+  useEffect(() => {
+   
+    if (!userId) {
+      userId = String(profile?.userId);
+      if (!userId) {
+        history.push("/login");
+      }
+    }
+    setProfileData(userId);
+    getStatus(userId);
+  }, [userId]);
+
+  return <Profile profile={profile} status={status} setNewStatus={setNewStatus} />;
 }
 
 let mapStateToProps = (state: RootStateType): MapStateType => {

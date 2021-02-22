@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import Denny from "../../assets/images/Deineris.jpg";
+import ava from "../../assets/images/ava.gif";
 import { ProfileType } from "../../redux/reducers/profile";
 import ProfileStatus from "./ProfileStatus";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../redux/reduxStore";
+import { Redirect } from "react-router";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
@@ -12,10 +15,15 @@ type ProfilePropsType = {
 };
 
 const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) => {
+  let isLogged = useSelector<RootStateType, boolean>((state) => state.auth.isLogged)
+    if (!isLogged) {
+      return <Redirect to='./login' />
+    }
+    
   let isProfile = profile ? (
     <>
       <img
-        src={!profile.photos.large ? Denny : profile.photos.large}
+        src={!profile.photos.large ? ava : profile.photos.large}
         alt={"ava"}
       />
       <div>{profile.fullName}</div>

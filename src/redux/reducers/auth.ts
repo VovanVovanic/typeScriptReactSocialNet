@@ -26,8 +26,9 @@ const initialState: authStateType = {
   isLogged: false
 }
 
-export const authReducer = (state:authStateType = initialState, action:setUserDataType | InitializeDataType):authStateType => {
-    switch (action.type) {
+export const authReducer = (state: authStateType = initialState, action: setUserDataType | InitializeDataType)
+  : authStateType => {
+  switch (action.type) {
       case SET_USER_DATA: return { ...state, isLogged: action.isLogged, isFetching: false, ...action.data }
       case INITIALIZE_DATE: return{...state, initialized:true}
         default:

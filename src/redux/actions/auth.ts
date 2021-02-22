@@ -9,7 +9,7 @@ export type setUserDataType = ReturnType<typeof setUserData>
 export type StopSubmitType = ReturnType<typeof stopSubmit>
 export type InitializeDataType = ReturnType<typeof initializeData>
 
-export const setUserData =(data:dataType, isLogged: boolean) => { 
+export const setUserData = (data: dataType, isLogged: boolean) => { 
     return { type: SET_USER_DATA, data, isLogged } as const;
 }
 export const initializeData = () => {
@@ -17,12 +17,17 @@ export const initializeData = () => {
 }
 
 
- const getUserData = ():ThunkAction<void, RootStateType, unknown, setUserDataType> => {
+const getUserData = (): ThunkAction<void, RootStateType, unknown, setUserDataType> => {
   return (dispatch) => {
         authMe().then((data) => {
           if (data.resultCode === 0) {
+            console.log(data.data);
+            
           dispatch(setUserData(data.data, true))
         }
+        }).catch((e) => {
+        console.log({...e});
+        
       });
   }
 }
