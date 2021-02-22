@@ -20,7 +20,9 @@ const reducers = combineReducers({
 
 type rootReducerType = typeof reducers
 export type RootStateType = ReturnType<rootReducerType>
-const store = createStore(reducers, applyMiddleware(thunk))
+
 // @ts-ignore
-window.store = store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 export default store
