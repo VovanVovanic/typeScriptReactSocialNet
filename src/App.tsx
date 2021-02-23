@@ -44,7 +44,7 @@ class App  extends Component<MapDispatchType & MapStateType> {
           <div style={{ fontSize: '22px' }}>
           <p>Sorry but APP creation is still in progress</p>
           <p>To log in get registered&ensp;
-                <a
+                <a style={{color:'yellow'}}
                   href={"https://social-network.samuraijs.com/ "}
                   target={"_blank"}>here</a></p>
               <p>or use common test account credentials:</p>
