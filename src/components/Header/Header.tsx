@@ -9,12 +9,9 @@ type HeaderPropsType = {
   isLogged: boolean;
   logoff: () => void;
 };
-const Header: React.FC<HeaderPropsType> = ({
-  login,
-  isFetching,
-  isLogged,
-  logoff,
-}) => {
+const Header: React.FC<HeaderPropsType> = ({ login, isFetching, isLogged, logoff }) => {
+  console.log(isFetching);
+  
   const onLogout = () => {
     logoff();
   };

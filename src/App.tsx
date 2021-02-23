@@ -41,7 +41,8 @@ class App  extends Component<MapDispatchType & MapStateType> {
         <HeaderContainer />
         <NavbarContainer />
         <div className="content">
-          <div style={{fontSize:'22px'}}>Sorry but APP creation is still in progress</div>
+          <div style={{ fontSize: '22px' }}>Sorry but APP creation is still in progress</div>
+          <Route exact path="/" render={() => <ProfileContainer />} />
           <Suspense fallback={<div>Loading...</div>}>
             <Route path="/dialogs" render={() => <Dialogs />} />
             <Route path="/news" component={() => <News />} />

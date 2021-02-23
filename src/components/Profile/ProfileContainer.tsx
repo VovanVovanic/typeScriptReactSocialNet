@@ -14,7 +14,8 @@ import { ProfileType } from "../../redux/reducers/profile";
 
 type MapStateType = {
   profile: ProfileType | null;
-  status: string
+  status: string,
+  authId: number | null
 };
 type MapDispatchType = {
   setProfileData: (id: string) => void;
@@ -28,15 +29,15 @@ type OwnPropsType = MapStateType & MapDispatchType
 
 type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, status, setProfileData, getStatus, setNewStatus }) => {
+const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, authId, status, setProfileData, getStatus, setNewStatus }) => {
   
+
   let userId = match.params.userId;
 
  
   useEffect(() => {
-   
     if (!userId) {
-      userId = String(profile?.userId);
+      userId = String(authId);
       if (!userId) {
         history.push("/login");
       }
@@ -49,7 +50,7 @@ const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, st
   useEffect(() => {
    
     if (!userId) {
-      userId = String(profile?.userId);
+      userId = String(authId);
       if (!userId) {
         history.push("/login");
       }
@@ -65,6 +66,7 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
   return {
     profile: state.profile.profile,
     status: state.profile.status,
+    authId: state.auth.id
   };
 }
 

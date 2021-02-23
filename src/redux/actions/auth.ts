@@ -19,12 +19,13 @@ export const initializeData = () => {
 
 const getUserData = (): ThunkAction<void, RootStateType, unknown, setUserDataType> => {
   return (dispatch) => {
+
         authMe().then((data) => {
           if (data.resultCode === 0) {
-            console.log(data.data);
-            
           dispatch(setUserData(data.data, true))
-        }
+          }
+          console.log(data);
+          
         }).catch((e) => {
         console.log({...e});
         

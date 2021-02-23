@@ -30,7 +30,7 @@ export const authReducer = (state: authStateType = initialState, action: setUser
   : authStateType => {
   switch (action.type) {
       case SET_USER_DATA: return { ...state, isLogged: action.isLogged, isFetching: false, ...action.data }
-      case INITIALIZE_DATE: return{...state, initialized:true}
+      case INITIALIZE_DATE: return{...state, initialized:true, isFetching:false}
         default:
         { return state } 
         
