@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6103ed01fdefaa2de2cf243fabf88c60",
+    "revision": "a07c046ba9dada03688dce68955995ec",
     "url": "/typeScriptReactSocialNet/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typeScriptReactSocialNet/static/css/2.d54708ad.chunk.css"
   },
   {
-    "revision": "0b8055cae584c1045abc",
-    "url": "/typeScriptReactSocialNet/static/css/3.8c5536d8.chunk.css"
+    "revision": "f5573c654bb7eacff3f8",
+    "url": "/typeScriptReactSocialNet/static/css/3.88cc6523.chunk.css"
   },
   {
     "revision": "af818d86ec555518f2e4",
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typeScriptReactSocialNet/static/css/7.a490bc20.chunk.css"
   },
   {
-    "revision": "b6e2cee8d868407de6e5",
+    "revision": "b22a25458ce9d208b3e0",
     "url": "/typeScriptReactSocialNet/static/css/main.131c4395.chunk.css"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typeScriptReactSocialNet/static/js/2.8a97bfd8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0b8055cae584c1045abc",
+    "revision": "f5573c654bb7eacff3f8",
     "url": "/typeScriptReactSocialNet/static/js/3.8613ad2d.chunk.js"
   },
   {
@@ -60,12 +60,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/typeScriptReactSocialNet/static/js/7.8a361d5b.chunk.js"
   },
   {
-    "revision": "b6e2cee8d868407de6e5",
-    "url": "/typeScriptReactSocialNet/static/js/main.082760e6.chunk.js"
+    "revision": "b22a25458ce9d208b3e0",
+    "url": "/typeScriptReactSocialNet/static/js/main.edfcbeb7.chunk.js"
   },
   {
-    "revision": "c774000b3abe0361296c",
-    "url": "/typeScriptReactSocialNet/static/js/runtime-main.181acd80.js"
+    "revision": "93fe6f5fe358cfbb31b5",
+    "url": "/typeScriptReactSocialNet/static/js/runtime-main.7a7f4223.js"
   },
   {
     "revision": "027520c2b798bbe85ab4d45c07989852",
