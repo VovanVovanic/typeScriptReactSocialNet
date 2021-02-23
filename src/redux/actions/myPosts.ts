@@ -1,10 +1,11 @@
 
 
 import { ThunkAction } from "redux-thunk";
-import { getThisStatus, getThisUser,  updateThisStatus,  } from "../../api/api";
+import { getThisStatus, getThisUser,  updatePhoto,  updateThisStatus,  } from "../../api/api";
 import { ProfileType } from "../reducers/profile";
+import { PhotosType } from "../reducers/users";
 import { RootStateType } from "../reduxStore";
-import {ADD_POST,  SET_STATUS, SET__PROFILE} from "./types";
+import {ADD_POST,  SET_PHOTOS,  SET_STATUS, SET__PROFILE} from "./types";
 
 
 
@@ -22,8 +23,12 @@ setProfile:(profile: ProfileType) => {
   },
  setStatus: (status:string)=> {
     return { type: SET_STATUS, status } as const
+  },
+  setPhotos: (photos: PhotosType) => {
+   return {type: SET_PHOTOS, photos} as const
+ }
 }
-}
+
 
 export const setProfileData = (id: string): ThunkAction<void, RootStateType, unknown, postsActionType> => {
   return (dispatch) => {
@@ -49,5 +54,16 @@ export const setNewStatus = (status: string): ThunkAction<void, RootStateType, u
         dispatch(postsActions.setStatus(status));
       }
     });
+  }
+}
+
+export const setNewPhoto = (ava: string | Blob): ThunkAction<void, RootStateType, unknown, postsActionType> => {
+  return (dispatch) => {
+    updatePhoto(ava).then((data) => {
+      console.log(data);
+      if (data.resultCode === 0) {
+        dispatch(postsActions.setPhotos(data.data.photos))
+      }
+    })
   }
 }

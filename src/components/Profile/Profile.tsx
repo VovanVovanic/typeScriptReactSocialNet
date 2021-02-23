@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ava from "../../assets/images/ava.gif";
@@ -10,15 +10,24 @@ import { Redirect } from "react-router";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
-  status: string
-  setNewStatus: (status:string)=>void
+  status: string;
+  setNewStatus: (status: string) => void;
+  isOwner: boolean;
+  setNewPhoto: (ava: string | Blob) => void;
 };
 
-const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) => {
+const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus, isOwner, setNewPhoto }) => {
   let isLogged = useSelector<RootStateType, boolean>((state) => state.auth.isLogged)
     if (!isLogged) {
       return <Redirect to='./login' />
+  }
+  const onPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+ 
+    if (e.target.files) {
+      setNewPhoto(e.target.files[0])
     }
+    
+  };
     
   let isProfile = profile ? (
     <>
@@ -26,6 +35,7 @@ const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus }) 
         src={!profile.photos.large ? ava : profile.photos.large}
         alt={"ava"}
       />
+      {isOwner && <input type={'file'} onChange={onPhotoChange}/>}
       <div>{profile.fullName}</div>
     </>
   ) : (

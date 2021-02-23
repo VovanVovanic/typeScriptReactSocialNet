@@ -54,3 +54,8 @@ export const loginMe = (email: string, password: string, rememberMe: boolean = f
 export const logoffMe = () => {
   return instance.delete<CommonResponseType<{}>>(`/auth/login/`).then(response => response.data)
 }
+export const updatePhoto = (ava: string | Blob) => {
+  const formData = new FormData()
+  formData.append('image', ava)
+    return instance.put(`profile/photo`, formData, {headers:{'Content-Type': 'multipart/form-data'}}).then((response)=>response.data)
+  }

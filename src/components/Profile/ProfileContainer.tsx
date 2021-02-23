@@ -9,6 +9,7 @@ import {
   getStatus,
   setProfileData,
   setNewStatus,
+  setNewPhoto
 } from "../../redux/actions/myPosts";
 import { ProfileType } from "../../redux/reducers/profile";
 
@@ -20,7 +21,8 @@ type MapStateType = {
 type MapDispatchType = {
   setProfileData: (id: string) => void;
   getStatus: (status: string) => void;
-  setNewStatus: (status: string) => void
+  setNewStatus: (status: string) => void;
+  setNewPhoto: (ava: string | Blob)=> void
 };
 type PathParamsType = {
   userId: string
@@ -29,12 +31,18 @@ type OwnPropsType = MapStateType & MapDispatchType
 
 type ProfileAPIPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, authId, status, setProfileData, getStatus, setNewStatus }) => {
-  
-
+const ProfileAPI: React.FC<ProfileAPIPropsType> = ({
+  match,
+  history,
+  profile,
+  authId,
+  status,
+  setProfileData,
+  getStatus,
+  setNewStatus,
+  setNewPhoto,
+}) => {
   let userId = match.params.userId;
-
- 
   useEffect(() => {
     if (!userId) {
       userId = String(authId);
@@ -44,11 +52,9 @@ const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, au
     }
     setProfileData(userId);
     getStatus(userId);
-
-  }, [])
+  }, []);
 
   useEffect(() => {
-   
     if (!userId) {
       userId = String(authId);
       if (!userId) {
@@ -59,8 +65,16 @@ const ProfileAPI: React.FC<ProfileAPIPropsType> = ({ match, history, profile, au
     getStatus(userId);
   }, [userId]);
 
-  return <Profile profile={profile} status={status} setNewStatus={setNewStatus} />;
-}
+  return (
+    <Profile
+      profile={profile}
+      status={status}
+      setNewStatus={setNewStatus}
+      isOwner={!userId}
+      setNewPhoto={setNewPhoto}
+    />
+  );
+};
 
 let mapStateToProps = (state: RootStateType): MapStateType => {
   return {
@@ -75,7 +89,8 @@ const ProfileContainer = compose<ComponentType>(
   connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
     setProfileData,
     getStatus,
-    setNewStatus
+    setNewStatus,
+    setNewPhoto
   }),
   withRouter,
   withAuthRedirect

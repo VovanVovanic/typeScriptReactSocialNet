@@ -41,16 +41,6 @@ class App  extends Component<MapDispatchType & MapStateType> {
         <HeaderContainer />
         <NavbarContainer />
         <div className="content">
-          <div style={{ fontSize: '22px' }}>
-          <p>Sorry but APP creation is still in progress</p>
-          <p>To log in get registered&ensp;
-                <a style={{color:'yellow'}}
-                  href={"https://social-network.samuraijs.com/ "}
-                  target={"_blank"}>here</a></p>
-              <p>or use common test account credentials:</p>
-              <p>Email: free@samuraijs.com</p>
-              <p>Password: free</p>
-          </div>
           <Route exact path="/" render={() => <ProfileContainer />} />
           <Suspense fallback={<div>Loading...</div>}>
             <Route path="/dialogs" render={() => <Dialogs />} />

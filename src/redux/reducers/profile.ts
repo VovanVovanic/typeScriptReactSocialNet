@@ -1,5 +1,5 @@
 import { postsActionType} from "../actions/myPosts";
-import { ADD_POST, SET_STATUS, SET__PROFILE } from "../actions/types";
+import { ADD_POST, SET_PHOTOS, SET_STATUS, SET__PROFILE } from "../actions/types";
 import { ContactsType, PhotosType } from "./users";
 
 export type postType = { post: string, like: number }
@@ -28,8 +28,6 @@ const initialState= {
 
 export const profileReducer = (state: profileStateType = initialState, action: postsActionType): profileStateType => {
     switch (action.type) {
-     
-
         case ADD_POST: {
             let newPost = { post: action.value, like: 3 }
             return {
@@ -42,6 +40,8 @@ export const profileReducer = (state: profileStateType = initialState, action: p
 
         case SET_STATUS:
             return { ...state, status: action.status }
+        case SET_PHOTOS: 
+            return {...state, profile:{...state.profile, photos:action.photos} as ProfileType }
         default:
             { return state }
     }
