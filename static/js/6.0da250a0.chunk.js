@@ -1,2 +1,0 @@
-(this["webpackJsonpmy-social-net-type"]=this["webpackJsonpmy-social-net-type"]||[]).push([[6],{297:function(t,e,n){t.exports={Settings:"Settings_Settings__1297Y"}},302:function(t,e,n){"use strict";n.r(e);var s=n(0),i=n.n(s),a=n(297),c=n.n(a),o=function(){return i.a.createElement("div",{className:c.a.Settings},"Settings")};e.default=o}}]);
-//# sourceMappingURL=6.0da250a0.chunk.js.map
