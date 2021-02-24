@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import { ProfileDataType } from '../components/Profile/editProfileForm'
 import { dataType } from '../redux/reducers/auth'
 import { ProfileType } from '../redux/reducers/profile'
 import { UsersType } from '../redux/reducers/users'
@@ -58,4 +59,8 @@ export const updatePhoto = (ava: string | Blob) => {
   const formData = new FormData()
   formData.append('image', ava)
     return instance.put(`profile/photo`, formData, {headers:{'Content-Type': 'multipart/form-data'}}).then((response)=>response.data)
+}
+export const updateProfile = (profile: ProfileDataType) => {
+  
+    return instance.put(`profile`, profile).then((response)=>response.data)
   }

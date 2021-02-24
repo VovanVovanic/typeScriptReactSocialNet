@@ -9,9 +9,11 @@ import {
   getStatus,
   setProfileData,
   setNewStatus,
-  setNewPhoto
+  setNewPhoto,
+  setUpdatedProfile
 } from "../../redux/actions/myPosts";
 import { ProfileType } from "../../redux/reducers/profile";
+import { ProfileDataType } from "./editProfileForm";
 
 type MapStateType = {
   profile: ProfileType | null;
@@ -22,7 +24,8 @@ type MapDispatchType = {
   setProfileData: (id: string) => void;
   getStatus: (status: string) => void;
   setNewStatus: (status: string) => void;
-  setNewPhoto: (ava: string | Blob)=> void
+  setNewPhoto: (ava: string | Blob) => void;
+  setUpdatedProfile: (data: ProfileDataType) => Promise<any>;
 };
 type PathParamsType = {
   userId: string
@@ -41,6 +44,7 @@ const ProfileAPI: React.FC<ProfileAPIPropsType> = ({
   getStatus,
   setNewStatus,
   setNewPhoto,
+  setUpdatedProfile
 }) => {
   let userId = match.params.userId;
   useEffect(() => {
@@ -72,6 +76,7 @@ const ProfileAPI: React.FC<ProfileAPIPropsType> = ({
       setNewStatus={setNewStatus}
       isOwner={!userId}
       setNewPhoto={setNewPhoto}
+      setUpdatedProfile={setUpdatedProfile}
     />
   );
 };
@@ -86,11 +91,12 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
 
 
 const ProfileContainer = compose<ComponentType>(
-  connect<MapStateType, MapDispatchType, {}, RootStateType>(mapStateToProps, {
+  connect<MapStateType, any, {}, RootStateType>(mapStateToProps, {
     setProfileData,
     getStatus,
     setNewStatus,
-    setNewPhoto
+    setNewPhoto,
+    setUpdatedProfile
   }),
   withRouter,
   withAuthRedirect

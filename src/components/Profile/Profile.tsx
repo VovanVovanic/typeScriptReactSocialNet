@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, useState} from "react";
 import s from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ava from "../../assets/images/ava.gif";
@@ -7,6 +7,8 @@ import ProfileStatus from "./ProfileStatus";
 import { useSelector } from "react-redux";
 import { RootStateType } from "../../redux/reduxStore";
 import { Redirect } from "react-router";
+import ProfileInfo from "./profieInfo";
+import EditProfileForm, { ProfileDataType } from "./editProfileForm";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
@@ -14,51 +16,62 @@ type ProfilePropsType = {
   setNewStatus: (status: string) => void;
   isOwner: boolean;
   setNewPhoto: (ava: string | Blob) => void;
+  setUpdatedProfile: (data: ProfileDataType) => Promise<any>;
 };
 
-const Profile: React.FC<ProfilePropsType> = ({ profile, status, setNewStatus, isOwner, setNewPhoto }) => {
-  let isLogged = useSelector<RootStateType, boolean>((state) => state.auth.isLogged)
-    if (!isLogged) {
-      return <Redirect to='./login' />
+const Profile: React.FC<ProfilePropsType> = ({
+  profile,
+  status,
+  setNewStatus,
+  isOwner,
+  setNewPhoto,
+  setUpdatedProfile,
+}) => {
+  let isLogged = useSelector<RootStateType, boolean>(
+    (state) => state.auth.isLogged
+  );
+  const [editMode, setEditMode] = useState<boolean>(false);
+
+  if (!isLogged) {
+    return <Redirect to="./login" />;
   }
   const onPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
- 
     if (e.target.files) {
-      setNewPhoto(e.target.files[0])
+      setNewPhoto(e.target.files[0]);
     }
-    
   };
-    
+
   let isProfile = profile ? (
     <>
       <img
         src={!profile.photos.large ? ava : profile.photos.large}
         alt={"ava"}
       />
-      {isOwner && <input type={'file'} onChange={onPhotoChange}/>}
-      <div>{profile.fullName}</div>
+      {isOwner && <input type={"file"} onChange={onPhotoChange} />}
     </>
   ) : (
-    ''
-    );
-  
-  let keys =profile && (Object.keys(profile.contacts) as Array<keyof typeof profile.contacts>);
-  let socials = keys?.map((el) => {
-    return (
-      <li key={el}>
-        {el}
-        </li>
-      )
-    })
-  
+    ""
+  );
+
+  const onSubmit = (data: ProfileDataType) => {
+    console.log(typeof setUpdatedProfile);
+    setUpdatedProfile(data)
+  };
+
   return (
     <div className={s.content}>
       <div>{isProfile}</div>
       <ProfileStatus status={status} setNewStatus={setNewStatus} />
-      <div>{profile?.fullName}</div>
-      <div>{profile?.lookingForAJob}</div>
-      <div>{profile?.lookingForAJobDescription}</div>
-      <ul>{socials}</ul>
+
+      {editMode ? (
+        <EditProfileForm initialValues={profile as Partial<ProfileDataType> | undefined} profile={profile} onSubmit={onSubmit} />
+      ) : (
+        <ProfileInfo
+          profile={profile}
+          isOwner={isOwner}
+          onEditMode={() => setEditMode(true)}
+        />
+      )}
       <MyPostsContainer />
     </div>
   );

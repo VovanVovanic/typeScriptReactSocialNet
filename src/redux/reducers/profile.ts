@@ -13,7 +13,9 @@ export type ProfileType = {
   fullName: string
   lookingForAJob: false
   lookingForAJobDescription: null | string
-  photos: PhotosType
+    photos: PhotosType
+    aboutMe: string
+  
 }
 export type profileStateType = typeof initialState
 
