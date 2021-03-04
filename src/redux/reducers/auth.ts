@@ -1,5 +1,6 @@
+import { SET_CAPTCHA } from './../actions/types';
 
-import { InitializeDataType, setUserDataType } from "../actions/auth";
+import { InitializeDataType, SetCaptchaType, setUserDataType } from "../actions/auth";
 import {  INITIALIZE_DATE, SET_USER_DATA } from "../actions/types";
 
 
@@ -13,7 +14,8 @@ export type authStateType = dataType & {
   initialized: boolean
   isFetching: boolean
   isLogged: boolean
-  imageSrc:null | string
+  imageSrc: null | string
+  captcha: null | string
 }
 
 const initialState: authStateType = {
@@ -23,14 +25,16 @@ const initialState: authStateType = {
   login: null,
   imageSrc:null,
   isFetching: true,
-  isLogged: false
+  isLogged: false,
+  captcha: null 
 }
 
-export const authReducer = (state: authStateType = initialState, action: setUserDataType | InitializeDataType)
+export const authReducer = (state: authStateType = initialState, action: setUserDataType | InitializeDataType | SetCaptchaType)
   : authStateType => {
   switch (action.type) {
       case SET_USER_DATA: return { ...state, isLogged: action.isLogged, isFetching: false, ...action.data }
-      case INITIALIZE_DATE: return{...state, initialized:true, isFetching:false}
+    case INITIALIZE_DATE: return { ...state, initialized: true, isFetching: false }
+    case SET_CAPTCHA: return{...state, captcha: action.captcha}
         default:
         { return state } 
         

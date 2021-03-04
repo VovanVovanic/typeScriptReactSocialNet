@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { getCaptchaUrl } from '../../api/api';
 import Preloader from '../Preloader/preloader';
 import s from './Header.module.css';
 
@@ -26,7 +27,9 @@ const Header: React.FC<HeaderPropsType> = ({ login, isFetching, isLogged, logoff
   let loginContent = isFetching ? <Preloader /> : userAvatar;
   return (
     <header className={s.header}>
-      <div></div>
+      <div>
+
+      </div>
       <div className={s.loginContentWrapper}>{loginContent}</div>
     </header>
   );

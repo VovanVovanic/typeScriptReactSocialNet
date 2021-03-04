@@ -49,8 +49,8 @@ export const getThisStatus = (id: string) => {
 export const updateThisStatus = (status: string) => {
   return instance.put<CommonResponseType<Object>>(`profile/status/`,{status}).then(response => response.data)
 }
-export const loginMe = (email: string, password: string, rememberMe: boolean = false) => {
-  return instance.post<CommonResponseType<{userId:number}>>(`/auth/login/`,{email, password, rememberMe}).then(response => response.data)
+export const loginMe = (email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) => {
+  return instance.post<CommonResponseType<{userId:number}>>(`/auth/login/`,{email, password, rememberMe, captcha}).then(response => response.data)
 }
 export const logoffMe = () => {
   return instance.delete<CommonResponseType<{}>>(`/auth/login/`).then(response => response.data)
@@ -61,6 +61,9 @@ export const updatePhoto = (ava: string | Blob) => {
     return instance.put(`profile/photo`, formData, {headers:{'Content-Type': 'multipart/form-data'}}).then((response)=>response.data)
 }
 export const updateProfile = (profile: ProfileDataType) => {
-  
     return instance.put(`profile`, profile).then((response)=>response.data)
-  }
+}
+export const getCaptchaUrl = () => {
+  
+  return instance.get<{ url: string }>(`/security/get-captcha-url/`).then((response)=>response.data)
+}

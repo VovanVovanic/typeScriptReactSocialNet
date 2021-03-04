@@ -6,16 +6,17 @@ import { RootStateType } from '../../redux/reduxStore';
 import LoginForm, { LoginDataType } from './loginForm'
 
 type MapDispatchType = {
-  login: (email: string, password: string, rememberMe: boolean) => void;
+  login: (email: string, password: string, rememberMe: boolean, captcha: null | string) => void;
 };
 type LoginMapStateType = {
   isLogged: boolean
+  captcha: null | string
 }
 
 
-const Login: React.FC<LoginMapStateType & MapDispatchType> = ({login,isLogged}) => {
+const Login: React.FC<LoginMapStateType & MapDispatchType> = ({login,isLogged, captcha}) => {
   const onSubmitData = (formData: LoginDataType) => {
-    login(formData.email, formData.password, formData.rememberMe);
+    login(formData.email, formData.password, formData.rememberMe, formData.captcha = null);
   };
 
   if (isLogged) {
@@ -24,7 +25,7 @@ const Login: React.FC<LoginMapStateType & MapDispatchType> = ({login,isLogged}) 
   return (
     <>
       <h2>Login</h2>
-      <LoginForm onSubmit={onSubmitData} />
+      <LoginForm onSubmit={onSubmitData} captcha={captcha}/>
     </>
   )
 };
@@ -32,6 +33,7 @@ const Login: React.FC<LoginMapStateType & MapDispatchType> = ({login,isLogged}) 
 const mapStateToProps = (state: RootStateType): LoginMapStateType => {
   return {
     isLogged: state.auth.isLogged,
+    captcha: state.auth.captcha
   };
   
 }
