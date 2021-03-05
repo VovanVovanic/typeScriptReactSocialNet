@@ -35,8 +35,6 @@ export const postsActions = {
 export const setProfileData = (id: string): ThunkAction<void, RootStateType, unknown, postsActionType> => {
   return (dispatch) => {
     getThisUser(id).then((data) => {
-
-
       dispatch(postsActions.setProfile(data));
     });
   }
@@ -57,7 +55,9 @@ export const setNewStatus = (status: string): ThunkAction<void, RootStateType, u
       if (data.resultCode === 0) {
         dispatch(postsActions.setStatus(status));
       }
-    });
+    }).catch((e) => {
+      debugger
+    })
   }
 }
 
@@ -67,6 +67,8 @@ export const setNewPhoto = (ava: string | Blob): ThunkAction<void, RootStateType
       if (data.resultCode === 0) {
         dispatch(postsActions.setPhotos(data.data.photos))
       }
+    }).catch((e) => {
+      
     })
   }
 }
@@ -75,13 +77,13 @@ export const setUpdatedProfile = (profile: ProfileDataType): ThunkType => async 
   let currentId = getState().auth.id
   let Id = currentId && currentId.toString()
   const response = await updateProfile(profile);
- 
   if (response.resultCode === 0) {
     dispatch(setProfileData(Id as string))
   }else {
     dispatch(stopSubmit('myProfileForm', { _error: response.messages[0].substring(30, response.messages[0].length-1) }))
     return Promise.reject(response.messages[0])
   }
+
 }
 export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, RootStateType, unknown, A>
 type ThunkType = BaseThunkType<postsActionType | FormAction>

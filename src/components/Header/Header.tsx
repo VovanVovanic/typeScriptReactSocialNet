@@ -1,38 +1,43 @@
+import { PoweroffOutlined } from '@ant-design/icons';
+import { Alert, Avatar, Button, Row } from 'antd';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { getCaptchaUrl } from '../../api/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoff } from '../../redux/actions/auth';
+import { authStateType } from '../../redux/reducers/auth';
+import { RootStateType } from '../../redux/reduxStore';
 import Preloader from '../Preloader/preloader';
-import s from './Header.module.css';
 
-type HeaderPropsType = {
-  login: null | string;
-  isFetching: boolean;
-  isLogged: boolean;
-  logoff: () => void;
-};
-const Header: React.FC<HeaderPropsType> = ({ login, isFetching, isLogged, logoff }) => { 
-  const onLogout = () => {
-    logoff();
-  };
-
+const HeaderLogo = () => {
+  const dispatch = useDispatch()
+  const authDates = useSelector<RootStateType, authStateType>((state) => state.auth);
+  const {isLogged, isFetching} = authDates
+  const onLogout = () => { dispatch(logoff()); };
+  
   let userAvatar = isLogged ? (
     <>
-      <img alt="ava" />
-      {login}
-      <button onClick={onLogout}>Logout</button>
+      <Avatar
+        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        style={{ marginRight: "30px" }}
+      />
+      <Button
+        type="primary"
+        danger
+        icon={<PoweroffOutlined />}
+        onClick={onLogout}
+      >
+        Logout
+      </Button>
     </>
   ) : (
-    <NavLink to="/login"> login</NavLink>
+    <Alert message="You are not authorised" type="warning" />
   );
   let loginContent = isFetching ? <Preloader /> : userAvatar;
   return (
-    <header className={s.header}>
-      <div>
 
-      </div>
-      <div className={s.loginContentWrapper}>{loginContent}</div>
-    </header>
+  <Row justify='end' align='middle' style={{height: "100%"}}>{loginContent}</Row>
   );
 };
 
-export default Header;
+export default HeaderLogo;
+
+        

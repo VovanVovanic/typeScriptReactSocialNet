@@ -28,11 +28,7 @@ const getUserData = (): ThunkAction<void, RootStateType, unknown, setUserDataTyp
           if (data.resultCode === 0) {
           dispatch(setUserData(data.data, true))
           }
-          // console.log(data);
-          
         }).catch((e) => {
-        console.log({...e});
-        
       });
   }
 }
@@ -57,7 +53,6 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     loginMe(email, password, rememberMe, captcha).then((data) => {
           if (data.resultCode === 0) {
             dispatch(getUserData())
-            
           } else {
             if (data.resultCode === 10) {
               dispatch(getCaptcha())
@@ -65,7 +60,9 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
             let errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error appeared'
             dispatch(stopSubmit('login', { _error: errorMessage }))
           }
-      });
+    }).catch((e) => {
+       
+      })
   }
 }
 
@@ -75,6 +72,6 @@ export const logoff = ():ThunkAction<void, RootStateType, unknown, setUserDataTy
           if (data.resultCode === 0) {
          dispatch(setUserData({  id: null, email: null, login: null}, false))
         }
-      });
+      }).catch((e)=>{})
   }
 }

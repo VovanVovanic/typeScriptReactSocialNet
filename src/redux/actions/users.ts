@@ -62,8 +62,6 @@ export const followUser = (id: number): ThunkAction<void, RootStateType, unknown
     dispatch(usersActions.triggerFollowStatus(true, id));
     followThisUser(id).then((data) => {
       if (data.resultCode === 0) {
-        console.log(data.data);
-        
         dispatch(usersActions.followUser(id));
       }
       dispatch(usersActions.triggerFollowStatus(false, id));

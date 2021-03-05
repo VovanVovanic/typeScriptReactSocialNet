@@ -3,6 +3,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import 'antd/dist/antd.css'
 import store, { RootStateType } from "./redux/reduxStore";
 import { Provider } from "react-redux";
 import AppContainer from "./App";

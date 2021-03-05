@@ -1,14 +1,12 @@
 
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { friendType } from "../../redux/reducers/sidebar";
-import Friends from "./friends";
-import classes from "./Navbar.module.css";
+import { Menu } from "antd";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
-type navBarPropsType = {
-  friendList: Array<friendType>;
-};
-const Navbar:React.FC<navBarPropsType> = ({ friendList }) => {
+
+
+const Navbar = () => {
+  const [active, setActive] = useState<number>(0)
   const list = [
     { label: "Profile", to: "/profile", exact: false },
     { label: "Messages", to: "/dialogs", exact: false },
@@ -16,29 +14,23 @@ const Navbar:React.FC<navBarPropsType> = ({ friendList }) => {
     { label: "Music", to: "/music", exact: false },
     { label: "Settings", to: "/settings", exact: false },
     { label: "Users", to: "/users", exact: false },
-    // { label: "Users", to: "/users", exact: false },
   ];
 
   const links = list.map(({ label, to, exact }, i) => {
     return (
-      <li key={i}>
-        <NavLink
-          className={classes.item}
-          to={to}
-          exact={exact}
-          activeClassName={classes.active}
-        >
+      <Menu.Item key={i} onClick={() => setActive(i)}>
+        <NavLink to={to} exact={exact}>
           {label}
         </NavLink>
-      </li>
+      </Menu.Item>
     );
   });
   return (
-    <nav className={classes.nav}>
-      <ul>{links}</ul>
-      <Friends friendList={friendList} />
-    </nav>
+    <Menu theme="dark" mode="horizontal" selectedKeys={[`${active}`]}>
+      {links}
+    </Menu>
   );
 };
+
 
 export default Navbar;
