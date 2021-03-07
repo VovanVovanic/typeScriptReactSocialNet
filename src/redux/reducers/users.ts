@@ -25,14 +25,14 @@ export type UserType = {
 export type UsersType = Array<UserType>
 
 export type ContactsType = {
-  facebook: null | string
-  website: null | string
-  vk: null | string
-  twitter: null | string
-  instagram: null | string
-  github: null | string
-  youtube: null | string
-  mainLink: null | string
+  facebook: null | string  
+  website: null | string 
+  vk: null | string 
+  twitter: null | string 
+  instagram: null | string 
+  github: null | string 
+  youtube: null | string 
+  mainLink: null | string 
 }
 
 export type UsersStateType = typeof initialState

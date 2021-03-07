@@ -14,6 +14,7 @@ import {
 } from "../../redux/actions/myPosts";
 import { ProfileType } from "../../redux/reducers/profile";
 import { ProfileDataType } from "./editProfileForm";
+import { UploadFile } from "antd/lib/upload/interface";
 
 type MapStateType = {
   profile: ProfileType | null;
@@ -24,7 +25,7 @@ type MapDispatchType = {
   setProfileData: (id: string) => void;
   getStatus: (status: string) => void;
   setNewStatus: (status: string) => void;
-  setNewPhoto: (ava: string | Blob) => void;
+  setNewPhoto: (ava: UploadFile<any>) => void;
   setUpdatedProfile: (data: ProfileDataType) => Promise<any>;
 };
 type PathParamsType = {

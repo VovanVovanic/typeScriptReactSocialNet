@@ -6,10 +6,10 @@ import HeaderNavbar from './HeaderNavbarr'
 
 const HeaderContent:React.FC<{location:string}> = ({location}) => {
   return (
-    <Header className="header">
+    <Header className="header" style={{padding: '0 24px'}}>
       <Row>
         <Col span={18}> <HeaderNavbar location={location}/></Col>
-        <Col span={6}><HeaderLogo /></Col>
+        <Col span={6} ><HeaderLogo /></Col>
       </Row>
     </Header>
   )

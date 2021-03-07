@@ -6,15 +6,16 @@ import { NavLink } from "react-router-dom";
 
 
 const HeaderNavbar:React.FC<{location:string}> = ({location}) => {
-const l = location === 'news' || location === 'music' ? location : null
+const l = location === 'news' || location === 'music' || location === 'login' ? location : null
   const [active, setActive] = useState<string| null>(null)
   useEffect(() => {
   setActive(l)
 }, [location])
   
   const list = [
-    { key: 'news',label: "News", to: "/news", exact: false },
-    { key: 'music',label: "Music", to: "/music", exact: false },
+    { key: "news", label: "News", to: "/news", exact: false },
+    { key: "music", label: "Music", to: "/music", exact: false },
+    { key: "login", label: "Login", to: "/login", exact: false },
   ];
 
   const links = list.map(({ label, to, exact, key }, i) => {

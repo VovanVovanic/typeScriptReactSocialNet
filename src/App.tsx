@@ -38,7 +38,7 @@ const App = ()=> {
           <Sider width={200} className="site-layout-background">
             <SidebarContent location={loc}/>
           </Sider>
-          <Layout style={{ padding: "0 24px 24px" }}>
+          <Layout >
             <Content
               className="site-layout-background"
               style={{

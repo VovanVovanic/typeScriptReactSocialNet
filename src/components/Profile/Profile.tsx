@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState} from "react";
-import s from "./Profile.module.css";
+import React, {  useState} from "react";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ava from "../../assets/images/ava.gif";
 import { ProfileType } from "../../redux/reducers/profile";
@@ -9,13 +8,18 @@ import { RootStateType } from "../../redux/reduxStore";
 import { Redirect } from "react-router";
 import ProfileInfo from "./profieInfo";
 import EditProfileForm, { ProfileDataType } from "./editProfileForm";
+import { Button, Card,Upload, Row, Col } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { UploadChangeParam } from "antd/lib/upload";
+import { UploadFile } from "antd/lib/upload/interface";
+import classes from "./profile.module.scss";
 
 type ProfilePropsType = {
   profile: ProfileType | null;
   status: string;
   setNewStatus: (status: string) => void;
   isOwner: boolean;
-  setNewPhoto: (ava: string | Blob) => void;
+  setNewPhoto: (ava: UploadFile<any>) => void;
   setUpdatedProfile: (data: ProfileDataType) => Promise<any>;
 };
 
@@ -35,45 +39,60 @@ const Profile: React.FC<ProfilePropsType> = ({
   if (!isLogged) {
     return <Redirect to="./login" />;
   }
-  const onPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setNewPhoto(e.target.files[0]);
-    }
+  const onPhotoChange = (info: UploadChangeParam<UploadFile<any>>) => {
+    setNewPhoto(info.file);
+    if(info.file.status === 'error'){return}
   };
 
   let isProfile = profile ? (
-    <>
-      <img
-        src={!profile.photos.large ? ava : profile.photos.large}
-        alt={"ava"}
-      />
-      {isOwner && <input type={"file"} onChange={onPhotoChange} />}
-    </>
+    <Card
+      hoverable
+      style={{ width: 240 }}
+      cover={<img alt="ava"
+          src={!profile.photos.large ? ava : profile.photos.large}/>}>
+      <div style={{textAlign: 'center'}}>
+        {isOwner && (
+          <Upload name="file" onChange={onPhotoChange}>
+            <Button icon={<UploadOutlined />}>Upload avatar</Button>
+          </Upload>
+          
+        )}
+      </div>
+    </Card>
   ) : (
     ""
   );
 
   const onSubmit = (data: ProfileDataType) => {
-    console.log(typeof setUpdatedProfile);
+
     setUpdatedProfile(data)
   };
 
   return (
-    <div className={s.content}>
-      <div>{isProfile}</div>
-      <ProfileStatus status={status} setNewStatus={setNewStatus} />
+    <>
+      <Row className={classes.profileWrap}>
+        <Col span={7}>{isProfile}</Col>
+        <Col span={17}>
+          {editMode ? (
+            <EditProfileForm
+              initialValues={profile as Partial<ProfileDataType> | undefined}
+              profile={profile}
+              onSubmit={onSubmit}
+            />
+          ) : (
+            <ProfileInfo
+              profile={profile}
+              isOwner={isOwner}
+              onEditMode={() => setEditMode(true)}
+            />
+          )}
+        </Col>
+      </Row>
 
-      {editMode ? (
-        <EditProfileForm initialValues={profile as Partial<ProfileDataType> | undefined} profile={profile} onSubmit={onSubmit} />
-      ) : (
-        <ProfileInfo
-          profile={profile}
-          isOwner={isOwner}
-          onEditMode={() => setEditMode(true)}
-        />
-      )}
+      <ProfileStatus status={status} setNewStatus={setNewStatus}/>
+
       <MyPostsContainer />
-    </div>
+    </>
   );
 };
 
