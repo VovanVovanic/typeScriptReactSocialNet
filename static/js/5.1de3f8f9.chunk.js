@@ -1,2 +1,0 @@
-(this["webpackJsonpmy-social-net-type"]=this["webpackJsonpmy-social-net-type"]||[]).push([[5],{298:function(e,s,t){e.exports={News:"News_News__VOjLQ"}},304:function(e,s,t){"use strict";t.r(s);var n=t(0),a=t.n(n),c=t(298),i=t.n(c),o=function(){return a.a.createElement("div",{className:i.a.News},"News")};s.default=o}}]);
-//# sourceMappingURL=5.1de3f8f9.chunk.js.map
