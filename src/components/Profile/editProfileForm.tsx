@@ -1,3 +1,6 @@
+import classes from './profile.module.scss';
+import { Button, Col, Row } from 'antd';
+import Title from 'antd/lib/typography/Title';
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { ProfileType } from '../../redux/reducers/profile'
@@ -23,7 +26,6 @@ export type ProfileDataType = {
   }
 };
 const ProfileForm: React.FC<ProfileFormType & InjectedFormProps<ProfileDataType, ProfileFormType>> = ({ profile, handleSubmit, error }) => {
-  console.log(error);
       let keys = profile && (Object.keys(profile.contacts) as Array<keyof typeof profile.contacts>);
     let socials = keys?.map((el) => {
       return (
@@ -35,23 +37,41 @@ const ProfileForm: React.FC<ProfileFormType & InjectedFormProps<ProfileDataType,
     });
   return (
     <form onSubmit={handleSubmit}>
-      <button type="submit">Save</button>
-      
+      <Row>
+        <Col span={18} style={{ textAlign: "center" }}>
+          <Title level={2} style={{ color: "wheat" }}>
+            Set new info
+          </Title>
+        </Col>
+        <Col span={6} style={{ justifyContent: "flex-end", display: "flex" }}>
+        <button type="submit" className={classes.submitBtn}>Save</button>
+        </Col>
+      </Row>
+
       <div>
         Name:
-        <Field component={Input} name="fullName" validate={[]}/>
+        <Field component={Input} name="fullName" validate={[]} />
       </div>
       <div>
         Looking for a job:
-        <Field component={Input} name="lookingForAJob" type={"checkbox"} validate={[]} />
+        <Field
+          component={Input}
+          name="lookingForAJob"
+          type={"checkbox"}
+          validate={[]}
+        />
       </div>
       <div>
         Job description:
-        <Field component={TextArea} name="lookingForAJobDescription" validate={[]}/>
+        <Field
+          component={TextArea}
+          name="lookingForAJobDescription"
+          validate={[]}
+        />
       </div>
-        <div>
+      <div>
         Job description:
-        <Field component={TextArea} name="aboutMe" validate={[]}/>
+        <Field component={TextArea} name="aboutMe" validate={[]} />
       </div>
       <div>
         Contacts:

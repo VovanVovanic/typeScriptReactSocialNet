@@ -41,7 +41,7 @@ const ProfileInfo: React.FC<ProfileInfoTypes> = ({ profile, isOwner, onEditMode 
     );
   })
   return (
-    <Typography>
+    <Typography >
       <Row>
         <Col span={20} style={{ textAlign: "center" }}>
           <Title level={2} style={{color: 'wheat'}}>Profile info</Title>
